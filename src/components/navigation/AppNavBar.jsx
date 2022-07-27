@@ -21,7 +21,7 @@ MenuLink.propTypes = {
 export default function AppNavBar() {
   return (
     <Router>
-      <Navbar bg="light" variant="light">
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>Uber Delivery</Navbar.Brand>
           <Nav className="me-auto">
