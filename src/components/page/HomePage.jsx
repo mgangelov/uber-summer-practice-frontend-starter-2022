@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import RestaurantsTable from '../RestaurantsTable';
 import LoadingContainer from '../common/LoadingContainer';
-import Link from 'react-router-dom';
 
 const headerStyle = {
   position: 'fixed',
