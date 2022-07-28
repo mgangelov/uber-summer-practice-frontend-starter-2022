@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Table } from 'react-bootstrap';
@@ -8,7 +9,7 @@ function TableContainer(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '900px',
+      height: '200px',
     }}
     >
       {props.children}

@@ -1,5 +1,7 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
 import RestaurantsTable from '../RestaurantsTable';
 
@@ -30,14 +32,33 @@ export default function RestaurnatsPage() {
   }
 
   return (
-    <Container style={{
-      paddingTop: '30px',
-      paddingBottom: '10px',
-    }}
-    >
-      {dataLoading ? (
-        <LoadingContainer />
-      ) : (<RestaurantsTable restaurantsData={restaurantsData} />)}
-    </Container>
+    <>
+      <h1>Open restaurants</h1>
+      <Link to="/restaurant">
+        <Button
+          variant="primary"
+          type="submit"
+          style={{
+            backgroundColor: 'blue',
+            border: '8px, black',
+            width: '10%',
+            left: '90%',
+            position: 'relative',
+          }}
+        >
+          Create a new restaurant
+        </Button>
+      </Link>
+      <Container style={{
+        paddingTop: '30px',
+        paddingBottom: '10px',
+      }}
+      >
+        {dataLoading ? (
+          <LoadingContainer />
+        ) : (<RestaurantsTable restaurantsData={restaurantsData} />)}
+      </Container>
+
+    </>
   );
 }

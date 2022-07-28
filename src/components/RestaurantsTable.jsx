@@ -8,7 +8,7 @@ function TableContainer(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '900px',
+      height: '150px',
     }}
     >
       {props.children}
