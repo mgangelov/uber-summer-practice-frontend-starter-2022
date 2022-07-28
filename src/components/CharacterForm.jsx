@@ -8,24 +8,14 @@ export default function CharacterForm({ values, setValues, onSubmit }) {
     name: event.target.value,
   });
 
-  const handleAddressChange = (event) => setValues({
+  const handleAgeChange = (event) => setValues({
     ...values,
-    address: event.target.value,
+    age: event.target.value,
   });
 
-  const handleDeliveryPriceChange = (event) => setValues({
+  const handleEmailChange = (event) => setValues({
     ...values,
-    deliveryPrice: event.target.value,
-  });
-
-  const handleOpeningHoursChange = (event) => setValues({
-    ...values,
-    openingHours: event.target.value,
-  });
-
-  const handleClosingHoursChange = (event) => setValues({
-    ...values,
-    closingHours: event.target.value,
+    email: event.target.value,
   });
 
   return (
@@ -43,47 +33,56 @@ export default function CharacterForm({ values, setValues, onSubmit }) {
         </Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formAddress">
-        <FloatingLabel label="Address">
-          <Form.Control required type="text" placeholder="Enter address" value={values.address} onChange={handleAddressChange} />
-        </FloatingLabel>
-        {/* <Form.Text className="text-muted">
-          Make it original.
-        </Form.Text> */}
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formDeliveryPrice">
-        <FloatingLabel label="Delivery Price">
-          <Form.Control required type="number" placeholder="Enter delivery price" min="3" max="6" value={values.deliveryPrice} onChange={handleDeliveryPriceChange} />
+      <Form.Group className="mb-3" controlId="formAge">
+        <FloatingLabel label="Age">
+          <Form.Control required type="number" placeholder="Enter age" min="1" max="900" value={values.age} onChange={handleAgeChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
-          Minimum 3 BGN.
+          Not older than Yoda (900 years).
         </Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formOpeningHours">
-        <FloatingLabel label="Opening hours">
-          <Form.Control required type="text" placeholder="Enter opening hours" value={values.openingHours} onChange={handleOpeningHoursChange} />
+      <Form.Group className="mb-3" controlId="formEmail">
+        <FloatingLabel label="Email">
+          <Form.Control required type="email" placeholder="Enter email" value={values.email} onChange={handleEmailChange} />
         </FloatingLabel>
-        {/* <Form.Text className="text-muted">
-          Make it original.
-        </Form.Text> */}
+        <Form.Text className="text-muted">
+          Aliens use Gmail too.
+        </Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formOpeningHours">
-        <FloatingLabel label="Closing hours">
-          <Form.Control required type="text" placeholder="Enter closing hours" value={values.closingHours} onChange={handleClosingHoursChange} />
-        </FloatingLabel>
-        {/* <Form.Text className="text-muted">
-          Make it original.
-        </Form.Text> */}
+      <Form.Group className="mb-3" controlId="formAffinity">
+        <Form.Check
+          onChange={() => setValues({
+            ...values,
+            affinity: 'light',
+          })}
+          inline
+          checked={values.affinity === 'light'}
+          name="affinityGroup"
+          type="radio"
+          id="light-side"
+          label="Light side"
+        />
+        <Form.Check
+          onChange={() => setValues({
+            ...values,
+            affinity: 'dark',
+          })}
+          inline
+          checked={values.affinity === 'dark'}
+          name="affinityGroup"
+          type="radio"
+          id="dark-side"
+          label="Dark side"
+        />
       </Form.Group>
 
       <Button
         variant="primary"
         type="submit"
       >
-        Create
+        Submit
       </Button>
     </Form>
   );
