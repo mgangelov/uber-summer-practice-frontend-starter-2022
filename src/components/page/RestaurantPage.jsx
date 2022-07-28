@@ -13,7 +13,7 @@ const INITIAL_VALUES = {
   deliveryPrice: '',
   openingHours: '',
   closingHours: '',
-  affinity: 'light',
+  // affinity: 'light',
 };
 
 function ImageContainer(props) {
@@ -41,7 +41,7 @@ export default function RestaurantPage() {
   const [logoSrc, setLogoSrc] = useState();
 
   useEffect(() => {
-    setLogoSrc(values.affinity === 'light' ? rest : empireLogo);
+    setLogoSrc(rest);
   }, [values.affinity]);
 
   const onFormSubmit = () => toggleCharacterModal(true);
