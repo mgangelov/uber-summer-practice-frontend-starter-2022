@@ -28,6 +28,7 @@ export default function AppNavBar() {
             <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/planets">Planets</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink to="/orders">Orders</MenuLink></Nav.Link>
           </Nav>
         </Container>
       </Navbar>

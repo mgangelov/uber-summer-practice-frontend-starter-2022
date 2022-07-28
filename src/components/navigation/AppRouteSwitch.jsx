@@ -6,6 +6,7 @@ import {
 import HomePage from '../page/HomePage';
 import CharacterPage from '../page/CharacterPage';
 import PlanetsPage from '../page/PlanetsPage';
+import OrdersPage from '../page/OrdersPage';
 
 export default function AppRouteSwitch() {
   return (
@@ -13,6 +14,7 @@ export default function AppRouteSwitch() {
       <Route exact path="/" element={<HomePage />} />
       <Route path="/planets" element={<PlanetsPage />} />
       <Route path="/character" element={<CharacterPage />} />
+      <Route path="/orders" element={<OrdersPage />} />
     </Routes>
   );
 }
