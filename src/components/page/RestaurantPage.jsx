@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
-import republicLogo from '../../static/republicLogo.png';
+// import republicLogo from '../../static/republicLogo.png';
 import empireLogo from '../../static/empireLogo.png';
-import CharacterForm from '../CharacterForm';
+import rest from '../../static/rest.jpg';
+import RestaurantForm from '../RestaurantForm';
 import CharacterModal from '../CharacterModal';
 
 const INITIAL_VALUES = {
   name: '',
-  age: 0,
-  email: '',
+  address: '',
+  deliveryPrice: '',
+  openingHours: '',
+  closingHours: '',
   affinity: 'light',
 };
 
@@ -32,13 +35,13 @@ ImageContainer.propTypes = {
   children: PropTypes.node,
 };
 
-export default function CharacterPage() {
+export default function RestaurantPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
   const [showCharacterModal, toggleCharacterModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
 
   useEffect(() => {
-    setLogoSrc(values.affinity === 'light' ? republicLogo : empireLogo);
+    setLogoSrc(values.affinity === 'light' ? rest : empireLogo);
   }, [values.affinity]);
 
   const onFormSubmit = () => toggleCharacterModal(true);
@@ -66,8 +69,8 @@ export default function CharacterPage() {
             alt="republic-logo"
           />
         </ImageContainer>
-        <p>Hello, please submit your application for a new Star Wars character</p>
-        <CharacterForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
+        <p>Please create a new restaurant</p>
+        <RestaurantForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
       </Container>
       <CharacterModal characterData={values} visible={showCharacterModal} onClose={onModalClose} />
     </>

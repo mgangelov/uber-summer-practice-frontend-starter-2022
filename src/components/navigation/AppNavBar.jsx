@@ -27,9 +27,10 @@ export default function AppNavBar() {
           <Nav className="me-auto">
             <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/planets">Planets</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/restaurants">Restaurants</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/items">Items</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/character">Restaurant</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink to="/restaurant">Restaurant</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/item">Item</MenuLink></Nav.Link>
           </Nav>
         </Container>
