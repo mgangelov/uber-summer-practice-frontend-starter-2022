@@ -12,7 +12,7 @@ const footerStyle = {
 export default function HomePage() {
   return (
     <>
-      <h1 className="display-1">Uber Summer Practice Front-end starter</h1>
+      <h1 className="display-1">Uber Summer Practice Order Management Frontend</h1>
       <p className="lead">
         Feel free to use as a starting point for your project
       </p>
