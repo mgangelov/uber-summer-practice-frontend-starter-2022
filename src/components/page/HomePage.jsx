@@ -1,35 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import RestaurantsTable from '../RestaurantsTable';
+import LoadingContainer from '../common/LoadingContainer';
+import Link from 'react-router-dom';
 
-const footerStyle = {
+const headerStyle = {
   position: 'fixed',
-  left: 0,
-  bottom: 0,
-  padding: '20px',
+  left: '0px',
+  top: '55px',
   width: '100%',
   textAlign: 'center',
+  fontFamily: 'futura',
 };
 
+const ORDERAPI_URL = 'http://172.18.167.189:5000/';
+
 export default function HomePage() {
+  const [restaurantsData, setRestaurantData] = useState([]);
+  const [dataLoading, setDataLoading] = useState([false]);
+  const [dataRequestStatus, setDataRequestStatus] = useState(200);
+
+  const fetchData = async () => {
+    setDataLoading(true);
+    const restaurantsDataReceived = await fetch(`${ORDERAPI_URL}/restaurant`);
+    const restaurantsDataStatus = restaurantsDataReceived.status;
+    const restaurantsDataJSON = await restaurantsDataReceived.json();
+    console.log(restaurantsDataJSON);
+    setRestaurantData(restaurantsDataJSON);
+    setDataRequestStatus(restaurantsDataStatus);
+    setDataLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (dataRequestStatus !== 200) {
+    return (<p>Something went wrong with your request.</p>);
+  }
+
   return (
     <>
-      <h1 className="display-1">Uber Summer Practice Order Management Frontend</h1>
-      <p className="lead">
-        Feel free to use as a starting point for your project
-      </p>
-      <p>
-        This is a sample React application using React Bootstrap component
-        library. It also shows how to do data fetching with React hooks. For
-        more information refer to README of the repo, or React-Bootstrap,
-        Bootstrap and React docs.
-      </p>
-      <footer style={footerStyle}>
-        <blockquote className="blockquote text-center">
-          <p><small>Do or do not. There is no try.</small></p>
-          <div className="blockquote-footer">
-            Yoda
-          </div>
-        </blockquote>
-      </footer>
+      <header style={headerStyle}>
+        <h1>Open Restaurants</h1>
+      </header>
+      <Container style={{
+        paddingTop: '30px',
+        paddingBottom: '10px',
+      }}
+      >
+        {dataLoading
+          ? (<LoadingContainer />) : (<RestaurantsTable restaurantsData={restaurantsData} />)}
+      </Container>
+
     </>
   );
 }
