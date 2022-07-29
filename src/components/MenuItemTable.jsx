@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import JsonData from './data.json';
@@ -37,17 +37,33 @@ TableContainer.propTypes = {
 //   }
 //   ]
 
-function JsonDisplay() {
-  const DisplayData = JsonData.map(
-    (info) => (
-      <tr>
-        <td>{info.id}</td>
-        <td>{info.name}</td>
-        <td>{info.category}</td>
-        <td>{info.price}</td>
-      </tr>
-    ),
+export function DisplayData(props) {
+  const { info } = props;
+  const [count, setCount] = useState(0);
+  const onClickFunc = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    } else {
+      setCount(0);
+    }
+  };
+  return (
+    <tr key={props.trKey}>
+      <td>{info.id}</td>
+      <td>{info.name}</td>
+      <td>{info.category}</td>
+      <td>{info.price}</td>
+      <td align="center">
+        <button type="button" onClick={onClickFunc} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>-</button>
+        <p style={{ display: 'inline-block', marginLeft: '20px' }}>{count}</p>
+        <button type="button" onClick={() => setCount(count + 1)} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>+</button>
+      </td>
+    </tr>
   );
+}
+
+function JsonDisplay() {
+  const [amount, setAmount] = useState([]);
 
   return (
     <div>
@@ -58,10 +74,18 @@ function JsonDisplay() {
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
+            <th style={{ textAlign: 'center' }}>Quantity</th>
           </tr>
         </thead>
         <tbody>
-          {DisplayData}
+          {JsonData.map((data) => (
+            <DisplayData
+              key={data.id}
+              trKey={data.id}
+              info={data}
+              setAmount={setAmount}
+            />
+          ))}
         </tbody>
       </table>
 

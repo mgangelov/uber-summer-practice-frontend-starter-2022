@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import LoadingContainer from '../common/LoadingContainer';
 import OrdersTable from '../OrdersTable';
 
-const ORDERAPI_URL = 'http://192.168.1.11:5000/';
+const ORDERAPI_URL = 'http://172.18.167.189:5000/';
 
 export default function OrdersPage() {
   const [ordersData, setOrdersData] = useState([]);
@@ -16,7 +16,7 @@ export default function OrdersPage() {
     const ordersDataStatus = ordersDataReceived.status;
     const ordersDataJSON = await ordersDataReceived.json();
     console.log(ordersDataJSON.Orders);
-    setOrdersData(ordersDataJSON);
+    setOrdersData(ordersDataJSON.Orders);
     setDataRequestStatus(ordersDataStatus);
     setDataLoading(false);
   };
@@ -29,15 +29,20 @@ export default function OrdersPage() {
     return (<p>Something went wrong with your request.</p>);
   }
   return (
-    <Container style={
-                        {
-                          paddingTop: '30px',
-                          paddingBottom: '10px',
-                        }
-                    }
-    >
-      {dataLoading
-        ? (<LoadingContainer />) : (<OrdersTable ordersData={ordersData} />)}
-    </Container>
+    <>
+      <h1 style={{
+        textAlign:'center',
+        fontFamily:'futura',
+      }}>All Orders</h1>
+      <Container style={{
+        paddingTop: '30px',
+        paddingBottom: '10px',
+      }}
+      >
+        {dataLoading
+          ? (<LoadingContainer />) : (<OrdersTable ordersData={ordersData} />)}
+      </Container>
+
+    </>
   );
 }
