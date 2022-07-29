@@ -59,44 +59,16 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
       </Form.Group>
 
       <Form.Group className="mb-3" >
-        <FloatingLabel label="Start Working Hour">
+        <FloatingLabel label="StartWorkingHour">
           <Form.Control required type="number" min="0" max = "24" placeholder="Enter start hour" value={values.starthour} onChange={handleStartHourChange} />
         </FloatingLabel>
       </Form.Group>
 
       <Form.Group className="mb-3" >
-        <FloatingLabel label="End Working Hour">
+        <FloatingLabel label="EndWorkingHour">
           <Form.Control required type="number" min="0" max = "24" placeholder="Enter end hour" value={values.endhour} onChange={handleEndHourChange} />
         </FloatingLabel>
       </Form.Group>
-
-
-      {/* <Form.Group className="mb-3" controlId="formAffinity">
-        <Form.Check
-          onChange={() => setValues({
-            ...values,
-            affinity: 'light',
-          })}
-          inline
-          checked={values.affinity === 'light'}
-          name="affinityGroup"
-          type="radio"
-          id="light-side"
-          label="Light side"
-        />
-        <Form.Check
-          onChange={() => setValues({
-            ...values,
-            affinity: 'dark',
-          })}
-          inline
-          checked={values.affinity === 'dark'}
-          name="affinityGroup"
-          type="radio"
-          id="dark-side"
-          label="Dark side"
-        />
-      </Form.Group> */}
 
       <Button
         variant="primary"
