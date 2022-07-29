@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function TableContainer(props) {
   return (
@@ -35,17 +36,18 @@ export default function ItemsTable(props) {
       <Table striped bordered hover>
         <thead>
           <tr style={{
-            backgroundColor: 'aqua',
+            backgroundColor: 'white',
           }}
           >
             <th>Name</th>
             <th align="right">Category</th>
             <th align="right">Price</th>
+            <th align="right"> </th>
           </tr>
         </thead>
         <tbody>
           {props.itemsData.map(({
-            name, category, price,
+            name, category, price, item_id, restaurant_id,
           }) => (
             <tr key={name}>
               <td>
@@ -53,6 +55,26 @@ export default function ItemsTable(props) {
               </td>
               <td align="right">{category}</td>
               <td align="right">{`${price}`}</td>
+              <td align="center">
+                <Link to={`/restaurants/${restaurant_id}/items/${item_id}`}>
+                  <Button style={{
+                    backgroundColor: 'blue',
+
+                  }}
+                  >
+                    Update
+                  </Button>
+                </Link>
+              </td>
+              <td align="center">
+                <Button style={{
+                  backgroundColor: 'blue',
+
+                }}
+                >
+                  Delete
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
