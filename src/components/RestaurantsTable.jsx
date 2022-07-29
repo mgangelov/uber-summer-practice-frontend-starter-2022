@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function TableContainer(props) {
   return (
@@ -8,7 +9,7 @@ function TableContainer(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '150px',
+      height: '200px',
     }}
     >
       {props.children}
@@ -34,7 +35,7 @@ export default function RestaurantsTable(props) {
       <Table striped bordered hover>
         <thead>
           <tr style={{
-            backgroundColor: 'aqua',
+            backgroundColor: 'white',
           }}
           >
             <th>Name</th>
@@ -42,11 +43,13 @@ export default function RestaurantsTable(props) {
             <th align="right">Delivery price</th>
             <th align="right">Opening hours</th>
             <th align="right">Closing hours</th>
+            <th align="right"> </th>
+            <th align="right"> </th>
           </tr>
         </thead>
         <tbody>
           {props.restaurantsData.map(({
-            name, address, delivery_price, opening, closing,
+            name, address, delivery_price, opening, closing, restaurant_id
           }) => (
             <tr key={name}>
               <td>
@@ -56,6 +59,26 @@ export default function RestaurantsTable(props) {
               <td align="right">{`${delivery_price}`}</td>
               <td align="right">{`${opening}`}</td>
               <td align="right">{`${closing}`}</td>
+              <td align="center">
+                <Link to={`/restaurants/${restaurant_id}` }>
+                <Button style={{
+                  backgroundColor: 'blue',
+                  
+                }}
+                >
+                  Update
+                </Button>
+                </Link>
+              </td>
+              <td align="center">
+                <Button style={{
+                  backgroundColor: 'blue',
+                  
+                }}
+                >
+                  Delete
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
