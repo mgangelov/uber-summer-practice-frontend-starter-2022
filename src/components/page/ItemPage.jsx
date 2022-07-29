@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import republicLogo from '../../static/republicLogo.png';
 import empireLogo from '../../static/empireLogo.png';
+import item from '../../static/item.jpg';
 import ItemForm from '../ItemForm';
 import CharacterModal from '../CharacterModal';
 
@@ -38,7 +39,7 @@ export default function ItemPage() {
   const [logoSrc, setLogoSrc] = useState();
 
   useEffect(() => {
-    setLogoSrc(values.affinity === 'light' ? republicLogo : empireLogo);
+    setLogoSrc(item);
   }, [values.affinity]);
 
   const onFormSubmit = () => toggleCharacterModal(true);
