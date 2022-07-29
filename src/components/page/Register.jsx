@@ -8,7 +8,7 @@ import RegisterModal from '../RegisterModal';
 
 const INITIAL_VALUES = {
   name: '',
-  age: "+359 ",
+  phone: '+359',
   email: '',
   affinity: 'light',
 };

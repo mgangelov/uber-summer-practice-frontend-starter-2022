@@ -8,9 +8,9 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
     name: event.target.value,
   });
 
-  const handleAgeChange = (event) => setValues({
+  const handlePhoneChange = (event) => setValues({
     ...values,
-    age: event.target.value,
+    phone: event.target.value,
   });
 
   const handleEmailChange = (event) => setValues({
@@ -43,9 +43,9 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
         </Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formAge">
-        <FloatingLabel label="PhoneNumber">
-          <Form.Control required type="text" placeholder="Enter phone number" value={values.age} onChange={handleAgeChange} />
+      <Form.Group className="mb-3" controlId="formPhone">
+        <FloatingLabel label="Phone number">
+          <Form.Control required type="text" placeholder="Enter phone number" value={values.phone} onChange={handlePhoneChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           It should include digits only.

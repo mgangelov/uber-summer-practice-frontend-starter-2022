@@ -8,7 +8,7 @@ const textstyle ={ textDecorationLine: 'underline', marginLeft:462}
 
 const INITIAL_VALUES = {
   name: '',
-  age: 0,
+  phone: '+359',
   email: '',
   affinity: 'light',
 };
