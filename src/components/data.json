@@ -1,0 +1,18 @@
+
+  [
+
+    {
+        "id":1,
+        "name":"ceaser",
+        "category":"salad",
+        "price":"11.90"
+    },
+    
+    {
+        "id":2,
+        "name":"carbonara",
+        "category":"pasta",
+        "price":"13.30"
+    }
+
+]
