@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 // import JsonDisplay from '../MenuItemTable';
+import { useParams } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
-import { Routes, Route, useParams } from "react-router-dom";
 import MenuItemTable from '../MenuItemTable';
 
 const ORDERAPI_URL = 'http://192.168.1.11:5000/';
@@ -19,7 +19,7 @@ export default function MenuPage() {
 
   const fetchData = async () => {
     setDataLoading(true);
-    const restaurantID = Invoice()
+    const restaurantID = Invoice();
     const ordersDataReceived = await fetch(`${ORDERAPI_URL}/restaurants/${restaurantID}/items`);
     const ordersDataStatus = ordersDataReceived.status;
     const ordersDataJSON = await ordersDataReceived.json();

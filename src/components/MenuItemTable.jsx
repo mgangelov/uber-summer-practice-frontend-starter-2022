@@ -85,6 +85,7 @@ function JsonDisplay() {
             <th align="right">Name</th>
             <th align="right">Category</th>
             <th align="right">Price</th>
+            <th style={{ textAlign: 'center' }}>Quantity</th>
           </tr>
         </thead>
         <tbody>
