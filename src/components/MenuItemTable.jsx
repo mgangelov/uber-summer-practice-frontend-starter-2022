@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import JsonData from './data.json';
 
 function TableContainer(props) {
@@ -64,17 +64,27 @@ export function DisplayData(props) {
 
 function JsonDisplay() {
   const [amount, setAmount] = useState([]);
+  if (DisplayData.length === 0) {
+    return (
+      <TableContainer>
+        <p>No data</p>
+      </TableContainer>
+    );
+  }
 
   return (
-    <div>
-      <table className="table table-strped">
+    <TableContainer>
+      <Table striped bordered hover>
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th style={{ textAlign: 'center' }}>Quantity</th>
+          <tr style={{
+            backgroundColor: 'black',
+            color: 'white',
+          }}
+          >
+            <th align="right">ID</th>
+            <th align="right">Name</th>
+            <th align="right">Category</th>
+            <th align="right">Price</th>
           </tr>
         </thead>
         <tbody>
@@ -87,9 +97,9 @@ function JsonDisplay() {
             />
           ))}
         </tbody>
-      </table>
+      </Table>
 
-    </div>
+    </TableContainer>
   );
 }
 
