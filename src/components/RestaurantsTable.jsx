@@ -49,7 +49,7 @@ export default function RestaurantsTable(props) {
         </thead>
         <tbody>
           {props.restaurantsData.map(({
-            name, address, delivery_price, opening, closing, restaurant_id
+            name, address, delivery_price, opening, closing, restaurant_id,
           }) => (
             <tr key={name}>
               <td>
@@ -60,20 +60,31 @@ export default function RestaurantsTable(props) {
               <td align="right">{`${opening}`}</td>
               <td align="right">{`${closing}`}</td>
               <td align="center">
-                <Link to={`/restaurants/${restaurant_id}` }>
-                <Button style={{
-                  backgroundColor: 'blue',
-                  
-                }}
-                >
-                  Update
-                </Button>
+                <Link to={`/restaurants/${restaurant_id}/items`}>
+                  <Button style={{
+                    backgroundColor: 'blue',
+
+                  }}
+                  >
+                    Menu
+                  </Button>
+                </Link>
+              </td>
+              <td align="center">
+                <Link to={`/restaurants/${restaurant_id}`}>
+                  <Button style={{
+                    backgroundColor: 'blue',
+
+                  }}
+                  >
+                    Update
+                  </Button>
                 </Link>
               </td>
               <td align="center">
                 <Button style={{
                   backgroundColor: 'blue',
-                  
+
                 }}
                 >
                   Delete
