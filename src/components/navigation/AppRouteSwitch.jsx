@@ -5,8 +5,11 @@ import {
 } from 'react-router-dom';
 import CharacterPage from '../page/CharacterPage';
 import PlanetsPage from '../page/PlanetsPage';
+
 import Login from '../page/Login';
 import Register from '../page/Register';
+
+import OrderPage from '../page/OrderPage';
 
 export default function AppRouteSwitch() {
   return (
@@ -16,6 +19,7 @@ export default function AppRouteSwitch() {
       <Route path="/register" element={<Register />} />
       <Route path="/planets" element={<PlanetsPage />} />
       <Route path="/character" element={<CharacterPage />} />
+      <Route path="/order" element={<OrderPage />} />
     </Routes>
   );
 }
