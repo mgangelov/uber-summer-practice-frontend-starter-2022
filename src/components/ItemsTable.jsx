@@ -38,25 +38,21 @@ export default function ItemsTable(props) {
             backgroundColor: 'aqua',
           }}
           >
-            <th>Item_id</th>
-            <th align="right">Name</th>
+            <th>Name</th>
             <th align="right">Category</th>
             <th align="right">Price</th>
-            <th align="right">Restaurant_id</th>
           </tr>
         </thead>
         <tbody>
           {props.itemsData.map(({
-            item_id, name, category, price, restaurant_id,
+            name, category, price,
           }) => (
-            <tr key={item_id}>
+            <tr key={name}>
               <td>
-                {item_id}
+                {name}
               </td>
-              <td align="right">{name}</td>
-              <td align="right">{`${category}`}</td>
+              <td align="right">{category}</td>
               <td align="right">{`${price}`}</td>
-              <td align="right">{`${restaurant_id}`}</td>
             </tr>
           ))}
         </tbody>
