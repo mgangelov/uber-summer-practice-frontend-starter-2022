@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
-// import republicLogo from '../../static/republicLogo.png';
-// import empireLogo from '../../static/empireLogo.png';
 import rest from '../../static/rest.jpg';
 import RestaurantForm from '../RestaurantForm';
-import CharacterModal from '../CharacterModal';
+import RestaurantModal from '../RestaurantModal';
 
 const INITIAL_VALUES = {
   name: '',
@@ -13,7 +11,6 @@ const INITIAL_VALUES = {
   deliveryPrice: '',
   openingHours: '',
   closingHours: '',
-  // affinity: 'light',
 };
 
 function ImageContainer(props) {
@@ -37,17 +34,17 @@ ImageContainer.propTypes = {
 
 export default function RestaurantPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  const [showCharacterModal, toggleCharacterModal] = useState(false);
+  const [showRestaurantModal, toggleRestaurantModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
 
   useEffect(() => {
     setLogoSrc(rest);
   }, [values.affinity]);
 
-  const onFormSubmit = () => toggleCharacterModal(true);
+  const onFormSubmit = () => toggleRestaurantModal(true);
 
   const onModalClose = () => {
-    toggleCharacterModal(false);
+    toggleRestaurantModal(false);
     setValues(INITIAL_VALUES);
   };
 
@@ -65,14 +62,15 @@ export default function RestaurantPage() {
               maxWidth: '100%',
             }}
             src={logoSrc}
-            className="republic-logo"
-            alt="republic-logo"
+            className="rest"
+            alt="Error"
           />
         </ImageContainer>
         <p>Please create a new restaurant</p>
         <RestaurantForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
       </Container>
-      <CharacterModal characterData={values} visible={showCharacterModal} onClose={onModalClose} />
+      {/* eslint-disable-next-line max-len */}
+      <RestaurantModal restaurantData={values} visible={showRestaurantModal} onClose={onModalClose} />
     </>
   );
 }
