@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -33,7 +34,7 @@ export default function AppNavBar() {
             <Nav.Link as="div"><MenuLink className="navlink" to="/planets">Planets</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink className="navlink" to="/character">Character</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink className="navlink" to="/orders">Orders</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink className="navlink" to="/orderstatus">Order Status</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink className="navlink" to="/order/:id/status">Order Status</MenuLink></Nav.Link>
           </Nav>
         </Container>
       </Navbar>

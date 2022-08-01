@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Table } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function TableContainer(props) {
   return (
@@ -69,16 +69,16 @@ export default function RestaurantTable(props) {
               <td align="right">{delivery_price}</td>
               <td align="center">
                 <Link to={`/restaurant/${restaurant_id}`}>
-                <button style={{
-                  backgroundColor: 'black',
-                  color: 'white',
-                  fontFamily: 'futura',
-                  borderRadius: '10px',
+                  <button style={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                    fontFamily: 'futura',
+                    borderRadius: '10px',
 
-                }}
-                >
-                  choose
-                </button>
+                  }}
+                  >
+                    Order
+                  </button>
                 </Link>
               </td>
             </tr>
