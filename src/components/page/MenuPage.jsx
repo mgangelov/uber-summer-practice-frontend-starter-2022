@@ -5,6 +5,7 @@ import LoadingContainer from '../common/LoadingContainer';
 import MenuItemTable from '../MenuItemTable';
 import OrderForm from '../OrderForm';
 
+<<<<<<< HEAD:src/components/page/MenuPage.jsx
 const menuURL = 'http://127.0.0.1:5000/';
 
 const INITIAL_VALUES = {
@@ -14,6 +15,9 @@ const INITIAL_VALUES = {
   cutlery: 0,
   additionalInfo: '',
 };
+=======
+const menuURL = 'http://172.18.167.143:5000/';
+>>>>>>> main:src/components/page/MenuItemPage.jsx
 
 export default function MenuPage() {
   const { restaurantID } = useParams();
