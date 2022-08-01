@@ -7,7 +7,7 @@ import OrdersTable from '../OrdersTable';
 import OrderStatusTable from '../OrderStatusTable';
 import {Link} from 'react-router-dom';
 
-const ORDERAPI_URL = 'http://172.18.167.143:5000/';
+const ORDERAPI_URL = 'http://127.0.0.1:5000/';
 
 const footerStyle = {
   position: 'fixed',

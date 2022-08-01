@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
 import MenuItemTable from '../MenuItemTable';
 import OrderForm from '../OrderForm';
-
-<<<<<<< HEAD:src/components/page/MenuPage.jsx
 const menuURL = 'http://127.0.0.1:5000/';
 
 const INITIAL_VALUES = {
@@ -15,9 +13,6 @@ const INITIAL_VALUES = {
   cutlery: 0,
   additionalInfo: '',
 };
-=======
-const menuURL = 'http://172.18.167.143:5000/';
->>>>>>> main:src/components/page/MenuItemPage.jsx
 
 export default function MenuPage() {
   const { restaurantID } = useParams();
@@ -50,7 +45,7 @@ export default function MenuPage() {
       mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
-      headers: {},
+      headers: { 'Content-type': 'application/json' },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: data,
@@ -59,7 +54,7 @@ export default function MenuPage() {
     return response.json();
   }
 
-  const onFormSubmit=() => {
+  const onFormSubmit = () => {
     const formData = new FormData();
 
     formData.append('name', values.name);
@@ -68,9 +63,9 @@ export default function MenuPage() {
     formData.append('cutlery', values.cutlery);
     formData.append('additionalInfo', values.additionalInfo);
 
-    postData(`http://localhost:5000/restaurant/${restaurantID}/order`, formData);
-  }
-
+    postData(`http://localhost:5000/restaurant/${restaurantID}/order`, JSON.stringify(values));
+    // ?? redirect
+  };
 
   if (dataRequestStatus !== 200) {
     return (<p>Something went wrong with your request.</p>);

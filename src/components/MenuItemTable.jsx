@@ -37,6 +37,7 @@ function DisplayData(props) {
       <td>{info.price}</td>
       <td align="center">
         <button type="button" onClick={onClickFunc} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>-</button>
+        {/* REPLACE COUNT WITH info.quantity, remove count stuff after */}
         <p style={{ display: 'inline-block', marginLeft: '20px' }}>{count}</p>
         <button type="button" onClick={() => setCount(count + 1)} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>+</button>
       </td>
@@ -46,7 +47,10 @@ function DisplayData(props) {
 
 export default function MenuItemTable(props) {
   console.log('Menu data is ', props.menuData);
-  const [amount, setAmount] = useState([]);
+  // Update menuData, add quantity property to every menu item
+  const menuDataWithQuantity = menuData.map();
+  // Use localMenuData to display items
+  const [localMenuData, setLocalMenuData] = useState(menuDataWithQuantity);
   if (props.menuData.length === 0) {
     return (
       <TableContainer>
@@ -54,6 +58,18 @@ export default function MenuItemTable(props) {
       </TableContainer>
     );
   }
+
+  const handleQuantityChange = (operation, menuItemID) => {
+
+    // Check if operation is plus or minus
+    // If plus:
+    //   1. Find menuItem in localMenuData
+    //   2. Increase/decrease quantity of local item
+    //   3. Set new  localMenuData to contain new item
+    
+    
+    setLocalMenuData({...localMenuData, "new item with increased quality"})
+  };
 
   return (
     <TableContainer>
@@ -72,12 +88,13 @@ export default function MenuItemTable(props) {
           </tr>
         </thead>
         <tbody>
+          {/* Change menuData with localMenuData here */}
           {props.menuData.map((data) => (
             <DisplayData
               key={data.id}
               trKey={data.id}
               info={data}
-              setAmount={setAmount}
+              onQuantityChange={(operation) => handleQuantityChange(operation, data.id)}
             />
           ))}
         </tbody>

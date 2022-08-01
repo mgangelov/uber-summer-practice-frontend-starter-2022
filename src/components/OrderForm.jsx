@@ -7,17 +7,17 @@ import {
 export default function OrderForm({ values, setValues, onSubmit }) {
   const handleNameChange = (event) => setValues({
     ...values,
-    name: event.target.value,
+    CustomerName: event.target.value,
   });
 
   const handleAddressChange = (event) => setValues({
     ...values,
-    address: event.target.value,
+    DeliveryAddress: event.target.value,
   });
 
   const handlePhoneChange = (event) => setValues({
     ...values,
-    phoneNumber: event.target.value,
+    PhoneNumber: event.target.value,
   });
 
   const handleAdditionalInfoChange = (event) => setValues({
@@ -48,7 +48,7 @@ export default function OrderForm({ values, setValues, onSubmit }) {
 
       <Form.Group className="mb-3" controlId="formName">
         <FloatingLabel label="Name">
-          <Form.Control required type="text" placeholder="Enter name" value={values.name} onChange={handleNameChange} />
+          <Form.Control required type="text" placeholder="Enter name" value={values.CustomerName} onChange={handleNameChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           Please fill in your name
@@ -57,7 +57,7 @@ export default function OrderForm({ values, setValues, onSubmit }) {
 
       <Form.Group className="mb-3" controlId="formDeliveryAddress">
         <FloatingLabel label="Delivery Address">
-          <Form.Control required type="text" placeholder="Enter delivery address" value={values.address} onChange={handleAddressChange} />
+          <Form.Control required type="text" placeholder="Enter delivery address" value={values.DeliveryAddress} onChange={handleAddressChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           Please fill in your address.
@@ -71,7 +71,7 @@ export default function OrderForm({ values, setValues, onSubmit }) {
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required
             placeholder="Enter phone number"
-            value={values.phoneNumber}
+            value={values.PhoneNumber}
             onChange={handlePhoneChange}
           />
         </FloatingLabel>

@@ -12,11 +12,7 @@ const headerStyle = {
   fontFamily: 'futura',
 };
 
-<<<<<<< HEAD
 const ORDERAPI_URL = 'http://127.0.0.1:5000/';
-=======
-const ORDERAPI_URL = 'http://172.18.167.143:5000/';
->>>>>>> main
 
 export default function HomePage() {
   const [restaurantsData, setRestaurantData] = useState([]);
