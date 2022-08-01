@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Table } from 'react-bootstrap';
-import JsonData from './data.json';
 
 function TableContainer(props) {
   return (
@@ -10,7 +9,7 @@ function TableContainer(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '600px',
+      height: '200px',
     }}
     >
       {props.children}
@@ -22,22 +21,7 @@ TableContainer.propTypes = {
   children: PropTypes.node,
 };
 
-// [
-//   {
-//     “id”: 1,
-//     "name”:”caesar”,
-//     “category”: “salad”,
-//     “price”: “11.90$”,
-//   },
-//   {
-//    “id”: 2,
-//     “name”:”carbonara”,
-//     “category”: “pasta”,
-//     “price”: “13.90$”,
-//   }
-//   ]
-
-export function DisplayData(props) {
+function DisplayData(props) {
   const { info } = props;
   const [count, setCount] = useState(0);
   const onClickFunc = () => {
@@ -62,9 +46,10 @@ export function DisplayData(props) {
   );
 }
 
-function JsonDisplay() {
+export default function MenuItemTable(props) {
+  console.log('Menu data is ', props.menuData);
   const [amount, setAmount] = useState([]);
-  if (DisplayData.length === 0) {
+  if (props.menuData.length === 0) {
     return (
       <TableContainer>
         <p>No data</p>
@@ -89,7 +74,7 @@ function JsonDisplay() {
           </tr>
         </thead>
         <tbody>
-          {JsonData.map((data) => (
+          {props.menuData.map((data) => (
             <DisplayData
               key={data.id}
               trKey={data.id}
@@ -104,4 +89,6 @@ function JsonDisplay() {
   );
 }
 
-export default JsonDisplay;
+MenuItemTable.propTypes = {
+  menuData: PropTypes.node,
+};
