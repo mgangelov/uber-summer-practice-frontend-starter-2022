@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
-import republicLogo from '../../static/republicLogo.png';
-import empireLogo from '../../static/empireLogo.png';
 import item from '../../static/item.jpg';
 import ItemForm from '../ItemForm';
-import CharacterModal from '../CharacterModal';
+import ItemModal from '../ItemModal';
 
 const INITIAL_VALUES = {
   name: '',
   category: '',
   price: '',
-  affinity: 'light',
 };
 
 function ImageContainer(props) {
@@ -22,6 +19,7 @@ function ImageContainer(props) {
       display: 'flex',
       justifyContent: 'center',
       paddingBottom: '10px',
+      borderRadius: '80px',
     }}
     >
       {props.children}
@@ -33,19 +31,43 @@ ImageContainer.propTypes = {
   children: PropTypes.node,
 };
 
+// const Item_Page_URL = 'http://127.0.0.1:5000/restaurants/1/items';
+
 export default function ItemPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  const [showCharacterModal, toggleCharacterModal] = useState(false);
+  const [showItemModal, toggleItemModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
+
+  // const postItems = async () => {
+  //   // const data = { name: 'Salad', category: 'salad', price: '12' };
+  //   fetch('http://127.0.0.1:5000/restaurants/1/items', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     // eslint-disable-next-line no-undef
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((response) => response.json())
+  //   // eslint-disable-next-line no-shadow
+  //     .then((data) => {
+  //       console.log('Success:', data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // };
+
+  // useEffect(() => { postItems(); }, []);
 
   useEffect(() => {
     setLogoSrc(item);
-  }, [values.affinity]);
+  });
 
-  const onFormSubmit = () => toggleCharacterModal(true);
+  const onFormSubmit = () => toggleItemModal(true);
 
   const onModalClose = () => {
-    toggleCharacterModal(false);
+    toggleItemModal(false);
     setValues(INITIAL_VALUES);
   };
 
@@ -61,16 +83,17 @@ export default function ItemPage() {
             style={{
               maxHeight: '100%',
               maxWidth: '100%',
+              borderRadius: '40px',
             }}
             src={logoSrc}
-            className="republic-logo"
-            alt="republic-logo"
+            className="item"
+            alt="Error"
           />
         </ImageContainer>
         <p>Please create a new item</p>
         <ItemForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
       </Container>
-      <CharacterModal characterData={values} visible={showCharacterModal} onClose={onModalClose} />
+      <ItemModal itemData={values} visible={showItemModal} onClose={onModalClose} />
     </>
   );
 }

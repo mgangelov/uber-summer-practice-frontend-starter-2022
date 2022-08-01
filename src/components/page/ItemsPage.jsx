@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
 import ItemsTable from '../ItemsTable';
 
@@ -11,10 +11,11 @@ export default function ItemsPage() {
   const [itemsData, setItemsData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [dataRequestStatus, setDataRequestStatus] = useState(200);
+  const { id } = useParams();
 
   const fetchData = async () => {
     setDataLoading(true);
-    const swItemsData = await fetch(`${itemsAPI_URL}/restaurants/7/items`);
+    const swItemsData = await fetch(`${itemsAPI_URL}/restaurants/${id}/items`);
     const swItemsDataStatus = swItemsData.status;
     const swItemsDataJSON = await swItemsData.json();
     console.log(swItemsDataJSON);
@@ -34,7 +35,7 @@ export default function ItemsPage() {
   return (
     <>
       <h1>Menu</h1>
-      <Link to="/item">
+      <Link to={`/restaurants/${id}/item`}>
         <Button
           variant="primary"
           type="submit"
