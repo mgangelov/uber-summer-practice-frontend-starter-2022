@@ -13,6 +13,12 @@ export default function ItemsPage() {
   const [dataRequestStatus, setDataRequestStatus] = useState(200);
   const { id } = useParams();
 
+  const deleteItem = (itemId) => {
+    console.log(itemsData)
+    const newItems = itemsData.filter(x => x.item_id != itemId);
+    setItemsData(newItems)
+  }
+
   const fetchData = async () => {
     setDataLoading(true);
     const swItemsData = await fetch(`${itemsAPI_URL}/restaurants/${id}/items`);
@@ -57,7 +63,7 @@ export default function ItemsPage() {
       >
         {dataLoading ? (
           <LoadingContainer />
-        ) : (<ItemsTable itemsData={itemsData} />)}
+        ) : (<ItemsTable itemsData={itemsData} onItemDeleted={deleteItem}/>)}
       </Container>
 
     </>

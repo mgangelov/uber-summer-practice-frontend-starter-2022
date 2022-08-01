@@ -34,7 +34,7 @@ export default function RestaurantsTable(props) {
     fetch(`http://localhost:5000/restaurants/${restaurantId}`, {
       method: 'DELETE',
     }).then(() => {
-      console.log('removed');
+      props.onRestaurantDeleted(restaurantId);
     }).catch((err) => {
       console.error(err);
     });
@@ -107,4 +107,5 @@ export default function RestaurantsTable(props) {
 
 RestaurantsTable.propTypes = {
   restaurantsData: PropTypes.array,
+  onRestaurantDeleted: PropTypes.func
 };
