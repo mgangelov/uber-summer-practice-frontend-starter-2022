@@ -5,11 +5,9 @@ import { Container, Table } from 'react-bootstrap';
 function TableContainer(props) {
   return (
     <Container style={{
-      position: 'relative',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '200px',
     }}
     >
       {props.children}

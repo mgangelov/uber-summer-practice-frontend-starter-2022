@@ -77,7 +77,7 @@ export default function RestaurantTable(props) {
 
                 }}
                 >
-                  choose
+                  Order
                 </button>
                 </Link>
               </td>

@@ -4,7 +4,7 @@ import RestaurantsTable from '../RestaurantsTable';
 import LoadingContainer from '../common/LoadingContainer';
 
 const headerStyle = {
-  position: 'fixed',
+  // position: 'fixed',
   left: '0px',
   top: '55px',
   width: '100%',
@@ -12,7 +12,7 @@ const headerStyle = {
   fontFamily: 'futura',
 };
 
-const ORDERAPI_URL = 'http://172.18.167.189:5000';
+const ORDERAPI_URL = 'http://127.0.0.1:5000/';
 
 export default function HomePage() {
   const [restaurantsData, setRestaurantData] = useState([]);
