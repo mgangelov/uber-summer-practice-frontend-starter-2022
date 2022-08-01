@@ -31,6 +31,26 @@ export default function ItemsTable(props) {
     );
   }
 
+  function deleteItem(restaurantId, itemId) {
+    fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
+      method: 'DELETE',
+    }).then(() => {
+      console.log('removed');
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  // function updateItem(restaurantId, itemId) {
+  //   fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
+  //     method: 'POST',
+  //   }).then(() => {
+  //     console.log('updated');
+  //   }).catch((err) => {
+  //     console.error(err);
+  //   });
+  // }
+
   return (
     <TableContainer>
       <Table striped bordered hover>
@@ -57,20 +77,17 @@ export default function ItemsTable(props) {
               <td align="right">{`${price}`}</td>
               <td align="center">
                 <Link to={`/restaurants/${restaurant_id}/items/${item_id}`}>
-                  <Button style={{
-                    backgroundColor: 'blue',
-
-                  }}
+                  <Button
+                    style={{ backgroundColor: 'blue' }}
                   >
                     Update
                   </Button>
                 </Link>
               </td>
               <td align="center">
-                <Button style={{
-                  backgroundColor: 'blue',
-
-                }}
+                <Button
+                  style={{ backgroundColor: 'blue' }}
+                  onClick={() => deleteItem(restaurant_id, item_id)}
                 >
                   Delete
                 </Button>

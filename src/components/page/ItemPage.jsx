@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import item from '../../static/item.jpg';
 import ItemForm from '../ItemForm';
 import ItemModal from '../ItemModal';
-import {useParams} from "react-router-dom";
 
 const INITIAL_VALUES = {
   name: '',
