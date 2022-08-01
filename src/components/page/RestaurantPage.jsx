@@ -70,6 +70,7 @@ export default function RestaurantPage() {
     formData.append('closing', values.closingHours);
 
     postData('http://localhost:5000/restaurants', formData);
+    toggleRestaurantModal(true);
   };
 
 
