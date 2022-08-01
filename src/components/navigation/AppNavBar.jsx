@@ -24,15 +24,13 @@ export default function AppNavBar() {
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand>Uber Delivery</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/planets">Planets</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/restaurants">Restaurants</MenuLink></Nav.Link>
-            {/* <Nav.Link as="div"><MenuLink to="/restaurants/:id/items">Items</MenuLink></Nav.Link> */}
-            <Nav.Link as="div"><MenuLink to="/restaurant">Restaurant</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/item">Item</MenuLink></Nav.Link>
-          </Nav>
+          <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
+          <Nav.Link as="div"><MenuLink to="/planets">Planets</MenuLink></Nav.Link>
+          <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
+          <Nav.Link as="div"><MenuLink to="/restaurants">Restaurants</MenuLink></Nav.Link>
+          <Nav.Link as="div"><MenuLink to="/restaurants/?id/items">Items</MenuLink></Nav.Link>
+          <Nav.Link as="div"><MenuLink to="/restaurant">Restaurant</MenuLink></Nav.Link>
+          <Nav.Link as="div"><MenuLink to="/item">Item</MenuLink></Nav.Link>
         </Container>
       </Navbar>
       <AppRouteSwitch />

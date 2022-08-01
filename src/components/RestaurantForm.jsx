@@ -54,7 +54,7 @@ export default function RestaurantForm({ values, setValues, onSubmit }) {
 
       <Form.Group className="mb-3" controlId="formDeliveryPrice">
         <FloatingLabel label="Delivery Price">
-          <Form.Control required type="number" placeholder="Enter delivery price" min="3" max="6" value={values.deliveryPrice} onChange={handleDeliveryPriceChange} />
+          <Form.Control required type="number" placeholder="Enter delivery price" min="1" value={values.deliveryPrice} onChange={handleDeliveryPriceChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           Minimum 3 BGN.
