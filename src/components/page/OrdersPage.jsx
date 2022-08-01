@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import LoadingContainer from '../common/LoadingContainer';
 import OrdersTable from '../OrdersTable';
 
-const ORDERAPI_URL = 'http://172.18.167.189:5000/';
+const ORDERAPI_URL = 'http://172.18.167.189:5000';
 
 export default function OrdersPage() {
   const [ordersData, setOrdersData] = useState([]);

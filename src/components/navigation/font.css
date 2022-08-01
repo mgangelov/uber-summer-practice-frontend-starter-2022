@@ -1,0 +1,24 @@
+@import url('http://fonts.cdnfonts.com/css/uber-move-text');
+
+.changeFont
+{
+    font-family: 'Uber Move Text', sans-serif;
+}
+p
+{
+    display: inline;
+}
+#delivery
+{
+    color: #ff3b30;
+}
+.navlink
+{
+    color:white;
+}
+.navlink:hover
+{
+    
+    color: #a1241e;
+    color:#ff3b30;
+}

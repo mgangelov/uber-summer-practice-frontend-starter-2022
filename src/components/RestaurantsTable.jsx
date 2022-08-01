@@ -67,7 +67,7 @@ export default function RestaurantTable(props) {
               <td align="right">{opening}</td>
               <td align="right">{closing}</td>
               <td align="right">{delivery_price}</td>
-              <td align="right">
+              <td align="center">
                 <Link to={`/restaurant/${restaurant_id}`}>
                 <button style={{
                   backgroundColor: 'black',

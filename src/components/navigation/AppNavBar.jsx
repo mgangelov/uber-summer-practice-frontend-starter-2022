@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import AppRouteSwitch from './AppRouteSwitch';
+import './font.css';
 
 function MenuLink({ children, ...props }) {
   return (
@@ -23,12 +24,15 @@ export default function AppNavBar() {
     <Router>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>Uber Delivery</Navbar.Brand>
+          <Navbar.Brand className="changeFont">
+            <p>Uber </p>
+            <p id="delivery">Delivery</p>
+          </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/planets">Planets</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/orders">Orders</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink className="navlink" to="/">Home</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink className="navlink" to="/planets">Planets</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink className="navlink" to="/character">Character</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink className="navlink" to="/orders">Orders</MenuLink></Nav.Link>
           </Nav>
         </Container>
       </Navbar>
