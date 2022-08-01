@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
 import MenuItemTable from '../MenuItemTable';
 
-const menuURL = 'http://172.18.167.189:5000';
+const menuURL = 'http://172.18.167.143:5000/';
 
 export default function MenuPage() {
   const { restaurantID } = useParams();
