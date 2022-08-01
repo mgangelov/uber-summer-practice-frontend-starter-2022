@@ -38,27 +38,27 @@ export default function ItemPage() {
   const [showItemModal, toggleItemModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
 
-  const postItems = async () => {
-    // const data = { name: 'Salad', category: 'salad', price: '12' };
-    fetch('http://127.0.0.1:5000/restaurants/1/items', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // eslint-disable-next-line no-undef
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-    // eslint-disable-next-line no-shadow
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
+  // const postItems = async () => {
+  //   // const data = { name: 'Salad', category: 'salad', price: '12' };
+  //   fetch('http://127.0.0.1:5000/restaurants/1/items', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     // eslint-disable-next-line no-undef
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((response) => response.json())
+  //   // eslint-disable-next-line no-shadow
+  //     .then((data) => {
+  //       console.log('Success:', data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // };
 
-  useEffect(() => { postItems(); }, []);
+  // useEffect(() => { postItems(); }, []);
 
   useEffect(() => {
     setLogoSrc(item);
