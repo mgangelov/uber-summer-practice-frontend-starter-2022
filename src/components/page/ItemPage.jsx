@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
-import republicLogo from '../../static/republicLogo.png';
-import empireLogo from '../../static/empireLogo.png';
 import item from '../../static/item.jpg';
 import ItemForm from '../ItemForm';
 import CharacterModal from '../CharacterModal';

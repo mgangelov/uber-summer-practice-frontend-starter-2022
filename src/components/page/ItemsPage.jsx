@@ -35,7 +35,7 @@ export default function ItemsPage() {
   return (
     <>
       <h1>Menu</h1>
-      <Link to="/item">
+      <Link to={`/restaurants/${id}/item`}>
         <Button
           variant="primary"
           type="submit"
