@@ -70,7 +70,7 @@ export default function RestaurantsTable(props) {
               <td align="right">{`${opening}`}</td>
               <td align="right">{`${closing}`}</td>
               <td align="center">
-                <Link to={` / restaurants /${restaurant_id}/items`}>
+                <Link to={`/restaurants/${restaurant_id}/items`}>
                   <Button style={{
                     backgroundColor: 'blue',
 
