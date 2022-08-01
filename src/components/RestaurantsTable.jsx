@@ -30,6 +30,16 @@ export default function RestaurantsTable(props) {
     );
   }
 
+  function deleteRestaurant(restaurantId) {
+    fetch(`http://localhost:5000/restaurants/${restaurantId}`, {
+      method: 'DELETE',
+    }).then(() => {
+      console.log('removed');
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
   return (
     <TableContainer>
       <Table striped bordered hover>
@@ -43,8 +53,8 @@ export default function RestaurantsTable(props) {
             <th align="right">Delivery price</th>
             <th align="right">Opening hours</th>
             <th align="right">Closing hours</th>
-            <th align="right"> </th>
-            <th align="right"> </th>
+            <th align="right" />
+            <th align="right" />
           </tr>
         </thead>
         <tbody>
@@ -72,20 +82,17 @@ export default function RestaurantsTable(props) {
               </td>
               <td align="center">
                 <Link to={`/restaurants/${restaurant_id}`}>
-                  <Button style={{
-                    backgroundColor: 'blue',
-
-                  }}
+                  <Button
+                      style={{backgroundColor: 'blue'}}
                   >
                     Update
                   </Button>
                 </Link>
               </td>
               <td align="center">
-                <Button style={{
-                  backgroundColor: 'blue',
-
-                }}
+                <Button
+                  style={{ backgroundColor: 'blue' }}
+                  onClick={() => deleteRestaurant(restaurant_id)}
                 >
                   Delete
                 </Button>
