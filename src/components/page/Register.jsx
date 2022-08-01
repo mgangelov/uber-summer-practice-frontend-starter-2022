@@ -47,26 +47,6 @@ export default function RegisterPage() {
 
     postData('http://127.0.0.1:5000/register', JSON.stringify(values));
   };
-
-//     // TODO: Add fetch and register courier
-//     fetch('http://127.0.0.1:5000/register', {
-//       method: 'POST',
-//       //   headers: {
-//       //     Accept: 'application/json',
-//       //     'Content-type': 'applicaton/json',
-//       //   },
-//       body: JSON.stringify({
-//         name: values.name,
-//         phone_number: values.phone,
-//         email: values.email,
-//         // start_hour: values.starthout,
-//         // end_hour: values.endhour,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => console.log(data));
-//   };
-
   return (
     <>
       <Container style={{
