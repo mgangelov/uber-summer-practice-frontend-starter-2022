@@ -11,8 +11,8 @@ export default function ItemsPage() {
   const [itemsData, setItemsData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [dataRequestStatus, setDataRequestStatus] = useState(200);
-  const {id} = useParams();
-  
+  const { id } = useParams();
+
   const fetchData = async () => {
     setDataLoading(true);
     const swItemsData = await fetch(`${itemsAPI_URL}/restaurants/${id}/items`);
@@ -35,6 +35,7 @@ export default function ItemsPage() {
   return (
     <>
       <h1>Menu</h1>
+      {/* <Link to="/restaurants/?id/items">*/}
       <Link to="/item">
         <Button
           variant="primary"
