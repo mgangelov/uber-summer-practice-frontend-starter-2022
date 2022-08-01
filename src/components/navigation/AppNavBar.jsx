@@ -31,8 +31,8 @@ export default function AppNavBar() {
             <Nav.Link as="div"><MenuLink to="/restaurants">Restaurants</MenuLink></Nav.Link>
             {/* eslint-disable-next-line max-len */}
             {/* <Nav.Link as="div"><MenuLink to="/restaurants/:id/items">Items</MenuLink></Nav.Link> */}
-            <Nav.Link as="div"><MenuLink to="/restaurant">Restaurant</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/item">Item</MenuLink></Nav.Link>
+            {/* <Nav.Link as="div"><MenuLink to="/restaurant">Restaurant</MenuLink></Nav.Link> */}
+            {/* <Nav.Link as="div"><MenuLink to="/restaurants/:id/item">Item</MenuLink></Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>
