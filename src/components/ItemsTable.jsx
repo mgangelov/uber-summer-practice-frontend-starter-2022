@@ -35,7 +35,7 @@ export default function ItemsTable(props) {
     fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
       method: 'DELETE',
     }).then(() => {
-      console.log('removed');
+      props.onItemDeleted(itemId);
     }).catch((err) => {
       console.error(err);
     });
@@ -102,4 +102,5 @@ export default function ItemsTable(props) {
 
 ItemsTable.propTypes = {
   itemsData: PropTypes.array,
+  onItemDeleted: PropTypes.func
 };

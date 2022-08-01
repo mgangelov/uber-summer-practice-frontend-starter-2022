@@ -12,6 +12,12 @@ export default function RestaurnatsPage() {
   const [dataLoading, setDataLoading] = useState(false);
   const [dataRequestStatus, setDataRequestStatus] = useState(200);
 
+  const deleteRestaurant = (restaurantId) => {
+    console.log(restaurantsData);
+    const newRestaurants = restaurantsData.filter((x) => x.restaurant_id != restaurantId);
+    setRestaurantsData(newRestaurants);
+  };
+
   const fetchData = async () => {
     setDataLoading(true);
     const swRestaurantsData = await fetch(`${restAPI_URL}/restaurants`);
@@ -56,7 +62,7 @@ export default function RestaurnatsPage() {
       >
         {dataLoading ? (
           <LoadingContainer />
-        ) : (<RestaurantsTable restaurantsData={restaurantsData} />)}
+        ) : (<RestaurantsTable restaurantsData={restaurantsData} onRestaurantDeleted={deleteRestaurant} />)}
       </Container>
 
     </>
