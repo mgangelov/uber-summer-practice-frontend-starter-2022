@@ -41,15 +41,15 @@ export default function ItemsTable(props) {
     });
   }
 
-  // function updateItem(restaurantId, itemId) {
-  //   fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
-  //     method: 'POST',
-  //   }).then(() => {
-  //     console.log('updated');
-  //   }).catch((err) => {
-  //     console.error(err);
-  //   });
-  // }
+  function updateItem(restaurantId, itemId) {
+    fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
+      method: 'POST',
+    }).then(() => {
+      console.log('updated');
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
 
   return (
     <TableContainer>
@@ -79,6 +79,7 @@ export default function ItemsTable(props) {
                 <Link to={`/restaurants/${restaurant_id}/items/${item_id}`}>
                   <Button
                     style={{ backgroundColor: 'blue' }}
+                    onClick={() => updateItem(restaurant_id, item_id)}
                   >
                     Update
                   </Button>
