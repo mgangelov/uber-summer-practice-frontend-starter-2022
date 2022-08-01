@@ -10,7 +10,7 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
 
   const handlePhoneChange = (event) => setValues({
     ...values,
-    phone: event.target.value,
+    phone_number: event.target.value,
   });
 
   const handleEmailChange = (event) => setValues({
@@ -20,12 +20,12 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
 
   const handleStartHourChange = (event) => setValues({
     ...values,
-    starthour: event.target.value,
+    start_hour: event.target.value,
   });
 
   const handleEndHourChange = (event) => setValues({
     ...values,
-    endhour: event.target.value,
+    end_hour: event.target.value,
   });
 
   return (
@@ -45,7 +45,7 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
 
       <Form.Group className="mb-3" controlId="formPhone">
         <FloatingLabel label="Phone number">
-          <Form.Control required type="text" placeholder="Enter phone number" value={values.phone} onChange={handlePhoneChange} />
+          <Form.Control required type="text" placeholder="Enter phone number" value={values.phone_number} onChange={handlePhoneChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           It should include digits only.
@@ -58,15 +58,15 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
         </FloatingLabel>
       </Form.Group>
 
-      <Form.Group className="mb-3" >
+      <Form.Group className="mb-3" controlId = "formStart">
         <FloatingLabel label="StartWorkingHour">
-          <Form.Control required type="number" min="0" max = "24" placeholder="Enter start hour" value={values.starthour} onChange={handleStartHourChange} />
+          <Form.Control required type="text" placeholder="Enter start hour" value={values.start_hour} onChange={handleStartHourChange} />
         </FloatingLabel>
       </Form.Group>
 
-      <Form.Group className="mb-3" >
+      <Form.Group className="mb-3" controlId = "formEnd">
         <FloatingLabel label="EndWorkingHour">
-          <Form.Control required type="number" min="0" max = "24" placeholder="Enter end hour" value={values.endhour} onChange={handleEndHourChange} />
+          <Form.Control required type="text" placeholder="Enter end hour" value={values.end_hour} onChange={handleEndHourChange} />
         </FloatingLabel>
       </Form.Group>
 
