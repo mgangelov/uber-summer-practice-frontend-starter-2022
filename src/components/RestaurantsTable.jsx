@@ -9,7 +9,7 @@ function TableContainer(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: 'S100px',
+      height: '200px',
     }}
     >
       {props.children}
