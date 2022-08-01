@@ -19,20 +19,26 @@ export default function RestaurantModal(props) {
             <Card style={{ width: '18rem' }}>
               <Card.Body>
                 <Card.Title>{restaurantData.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{`Address: ${restaurantData.address}`}</Card.Subtitle>
                 <Card.Text>
-                  Working Hours:
-                  {' '}
-                  {restaurantData.openingHours}
-                  {' - '}
-                  {restaurantData.closingHours}
-                  {' '}
-                  Delivery Price:
-                  {' '}
-                  {restaurantData.deliveryPrice}
-                  {' '}
-                  BGN
-                  .
+                  <div>
+                    Address:
+                    {' '}
+                    {restaurantData.address}
+                  </div>
+                  <div>
+                    Working Hours:
+                    {' '}
+                    {restaurantData.openingHours}
+                    {' - '}
+                    {restaurantData.closingHours}
+                  </div>
+                  <div>
+                    Delivery Price:
+                    {' '}
+                    {restaurantData.deliveryPrice}
+                    {' '}
+                    BGN.
+                  </div>
                 </Card.Text>
               </Card.Body>
             </Card>

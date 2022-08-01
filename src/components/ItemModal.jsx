@@ -19,13 +19,19 @@ export default function ItemModal(props) {
             <Card style={{ width: '18rem' }}>
               <Card.Body>
                 <Card.Title>{itemData.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{`Category ${itemData.category}`}</Card.Subtitle>
                 <Card.Text>
-                  Price:
-                  {' '}
-                  {itemData.price}
-                  {' '}
-                  BGN.
+                  <div>
+                    Category:
+                    {' '}
+                    {itemData.category}
+                  </div>
+                  <div>
+                    Price:
+                    {' '}
+                    {itemData.price}
+                    {' '}
+                    BGN.
+                  </div>
                 </Card.Text>
               </Card.Body>
             </Card>
