@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 
-const buttonStyle = { height: 60, marginTop: 10, width: 400, marginLeft: 450, justifyContent: 'center', alignItems: 'center'};
+const buttonStyle = { height: 60, marginTop: 10, width: 400, marginLeft: 450, justifyContent: 'center', alignItems: 'center' };
 
 export default function LoginForm({ values, setValues, onSubmit }) {
   const handleEmailChange = (event) => setValues({
