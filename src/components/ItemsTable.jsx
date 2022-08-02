@@ -51,6 +51,7 @@ export default function ItemsTable(props) {
     });
   }
 
+
   return (
     <TableContainer>
       <Table striped bordered hover>
@@ -74,7 +75,7 @@ export default function ItemsTable(props) {
                 {name}
               </td>
               <td align="right">{category}</td>
-              <td align="right">{`${price}`}</td>
+              <td align="right">{`${price} BGN`}</td>
               <td align="center">
                 <Link to={`/restaurants/${restaurant_id}/items/${item_id}`}>
                   <Button
@@ -103,5 +104,5 @@ export default function ItemsTable(props) {
 
 ItemsTable.propTypes = {
   itemsData: PropTypes.array,
-  onItemDeleted: PropTypes.func
+  onItemDeleted: PropTypes.func,
 };
