@@ -74,17 +74,18 @@ export default function UpdateItemPage() {
       body: data, // body data type must match "Content-Type" header
     });
 
-    return response.json(); // parses JSON response into native JavaScript objects
+    return response; // parses JSON response into native JavaScript objects
   }
 
-  const onFormSubmit = () => {
+  const onFormSubmit = async () => {
     const formData = new FormData();
 
     formData.append('name', values.name);
     formData.append('category', values.category);
     formData.append('price', values.price);
 
-    postData(`http://localhost:5000/restaurants/${restaurant_id}/items/${item_id}`, formData);
+    const updateResult = await postData(`http://localhost:5000/restaurants/${restaurant_id}/items/${item_id}`, formData);
+    window.location = (`http://localhost:3000/restaurants/${restaurant_id}/items`)
     // toggleItemModal(true);
   };
 
