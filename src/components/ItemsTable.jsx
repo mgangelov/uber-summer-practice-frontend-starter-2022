@@ -41,7 +41,6 @@ export default function ItemsTable(props) {
     });
   }
 
-<<<<<<< Updated upstream
   function updateItem(restaurantId, itemId) {
     fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
       method: 'POST',
@@ -52,8 +51,7 @@ export default function ItemsTable(props) {
     });
   }
 
-=======
->>>>>>> Stashed changes
+
   return (
     <TableContainer>
       <Table striped bordered hover>

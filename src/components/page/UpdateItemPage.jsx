@@ -34,7 +34,7 @@ ImageContainer.propTypes = {
   children: PropTypes.node,
 };
 
-export default function ItemPage() {
+export default function UpdateItemPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
   const [showItemModal, toggleItemModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
@@ -51,6 +51,7 @@ export default function ItemPage() {
     // setDataRequestStatus(swItemsDataStatus);
     // setDataLoading(false);
   };
+
   useEffect(() => {
     setLogoSrc(item);
     fetchData();
