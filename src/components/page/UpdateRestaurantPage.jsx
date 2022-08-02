@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import rest from '../../static/rest.jpg';
-import RestaurantForm from '../RestaurantForm';
-import RestaurantModal from '../RestaurantModal';
+import UpdateRestaurantForm from '../UpdateRestaurantForm';
+
+// eslint-disable-next-line camelcase
+const restAPI_URL = 'http://127.0.0.1:5000';
 
 const INITIAL_VALUES = {
   name: '',
   address: '',
   deliveryPrice: '',
-  openingHours: '',
-  closingHours: '',
+  openHours: '',
+  closeHours: '',
 };
 
 function ImageContainer(props) {
@@ -21,6 +24,7 @@ function ImageContainer(props) {
       display: 'flex',
       justifyContent: 'center',
       paddingBottom: '10px',
+      borderRadius: '80px',
     }}
     >
       {props.children}
@@ -32,14 +36,28 @@ ImageContainer.propTypes = {
   children: PropTypes.node,
 };
 
-export default function RestaurantPage() {
+export default function UpdateRestaurantPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  const [showRestaurantModal, toggleRestaurantModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
+  const { restaurant_id } = useParams();
+
+  const fetchData = async () => {
+    const restaurantData = await fetch(`${restAPI_URL}/restaurants/${restaurant_id}`);
+    const data = await restaurantData.json();
+
+    setValues({
+      name: data.name,
+      address: data.address,
+      deliveryPrice: data.delivery_price,
+      openHours: data.open_hours,
+      closeHours: data.close_hours,
+    });
+  };
 
   useEffect(() => {
     setLogoSrc(rest);
-  }, [values.affinity]);
+    fetchData();
+  }, []);
 
   async function postData(url = '', data = {}) {
     // Default options are marked with *
@@ -66,41 +84,35 @@ export default function RestaurantPage() {
     formData.append('name', values.name);
     formData.append('address', values.address);
     formData.append('delivery_price', values.deliveryPrice);
-    formData.append('open_hours', values.openingHours);
-    formData.append('close_hours', values.closingHours);
+    formData.append('open_hours', values.openHours);
+    formData.append('close_hours', values.closeHours);
 
-    postData('http://localhost:5000/restaurants', formData);
-    toggleRestaurantModal(true);
+    // eslint-disable-next-line camelcase
+    postData(`http://localhost:5000/restaurants/${restaurant_id}`, formData);
+
   };
 
-  const onModalClose = () => {
-    toggleRestaurantModal(false);
-    setValues(INITIAL_VALUES);
-  };
 
   return (
-    <>
-      <Container style={{
-        paddingTop: '30px',
-        paddingBottom: '10px',
-      }}
-      >
-        <ImageContainer>
-          <img
-            style={{
-              maxHeight: '100%',
-              maxWidth: '100%',
-            }}
-            src={logoSrc}
-            className="rest"
-            alt="Error"
-          />
-        </ImageContainer>
-        <p>Please create a new restaurant</p>
-        <RestaurantForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
-      </Container>
-      {/* eslint-disable-next-line max-len */}
-      <RestaurantModal restaurantData={values} visible={showRestaurantModal} onClose={onModalClose} />
-    </>
+    <Container style={{
+      paddingTop: '30px',
+      paddingBottom: '10px',
+    }}
+    >
+      <ImageContainer>
+        <img
+          style={{
+            maxHeight: '100%',
+            maxWidth: '100%',
+            borderRadius: '40px',
+          }}
+          src={logoSrc}
+          className="rest"
+          alt="Error"
+        />
+      </ImageContainer>
+      <p>Please update restaurant</p>
+      <UpdateRestaurantForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
+    </Container>
   );
 }

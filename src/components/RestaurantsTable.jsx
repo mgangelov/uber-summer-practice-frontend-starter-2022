@@ -40,6 +40,17 @@ export default function RestaurantsTable(props) {
     });
   }
 
+  function updateRestaurant(restaurantId) {
+    fetch(`http://localhost:5000/restaurants/${restaurantId}`, {
+      method: 'POST',
+      body: data
+    }).then(() => {
+      console.log('updated');
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
   return (
     <TableContainer>
       <Table striped bordered hover>
@@ -59,16 +70,16 @@ export default function RestaurantsTable(props) {
         </thead>
         <tbody>
           {props.restaurantsData.map(({
-            name, address, delivery_price, opening, closing, restaurant_id,
+            name, address, delivery_price, open_hours, close_hours, restaurant_id,
           }) => (
             <tr key={name}>
               <td>
                 {name}
               </td>
               <td align="right">{address}</td>
-              <td align="right">{`${delivery_price}`}</td>
-              <td align="right">{`${opening}`}</td>
-              <td align="right">{`${closing}`}</td>
+              <td align="right">{`${delivery_price} BGN`}</td>
+              <td align="right">{`${open_hours}`}</td>
+              <td align="right">{`${close_hours}`}</td>
               <td align="center">
                 <Link to={`/restaurants/${restaurant_id}/items`}>
                   <Button style={{
@@ -83,7 +94,8 @@ export default function RestaurantsTable(props) {
               <td align="center">
                 <Link to={`/restaurants/${restaurant_id}`}>
                   <Button
-                      style={{backgroundColor: 'blue'}}
+                    style={{ backgroundColor: 'blue' }}
+                    onClick={() => updateRestaurant(restaurant_id)}
                   >
                     Update
                   </Button>
@@ -107,5 +119,5 @@ export default function RestaurantsTable(props) {
 
 RestaurantsTable.propTypes = {
   restaurantsData: PropTypes.array,
-  onRestaurantDeleted: PropTypes.func
+  onRestaurantDeleted: PropTypes.func,
 };

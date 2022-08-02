@@ -11,6 +11,7 @@ import RestaurantsPage from '../page/RestaurantsPage';
 import ItemPage from '../page/ItemPage';
 import ItemsPage from '../page/ItemsPage';
 import UpdateItemPage from '../page/UpdateItemPage';
+import UpdateRestaurantPage from '../page/UpdateRestaurantPage';
 
 export default function AppRouteSwitch() {
   return (
@@ -23,6 +24,7 @@ export default function AppRouteSwitch() {
       <Route path="/restaurant" element={<RestaurantPage />} />
       <Route path="/restaurants/:id/item" element={<ItemPage />} />
       <Route path="/restaurants/:restaurant_id/items/:item_id" element={<UpdateItemPage />} />
+      <Route path="/restaurants/:restaurant_id" element={<UpdateRestaurantPage />} />
     </Routes>
   );
 }
