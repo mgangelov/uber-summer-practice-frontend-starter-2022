@@ -7,6 +7,7 @@ import CharacterPage from '../page/CharacterPage';
 import PlanetsPage from '../page/PlanetsPage';
 import Login from '../page/Login';
 import Register from '../page/Register';
+import OpenOrdersPage from '../page/OpenOrdersPage';
 
 export default function AppRouteSwitch() {
   return (
@@ -15,6 +16,8 @@ export default function AppRouteSwitch() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/planets" element={<PlanetsPage />} />
+      <Route exact path="/" element={<HomePage />} />
+      <Route path="/orders" element={<OpenOrdersPage />} />
       <Route path="/character" element={<CharacterPage />} />
     </Routes>
   );
