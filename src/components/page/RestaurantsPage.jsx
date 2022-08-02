@@ -14,7 +14,7 @@ export default function RestaurnatsPage() {
 
   const deleteRestaurant = (restaurantId) => {
     console.log(restaurantsData);
-    const newRestaurants = restaurantsData.filter((x) => x.restaurant_id != restaurantId);
+    const newRestaurants = restaurantsData.filter((x) => x.restaurant_id !== restaurantId);
     setRestaurantsData(newRestaurants);
   };
 

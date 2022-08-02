@@ -55,7 +55,19 @@ export default function RestaurantsTable(props) {
     });
   }
 
+  function updateRestaurant(restaurantId) {
+    fetch(`http://localhost:5000/restaurants/${restaurantId}`, {
+      method: 'POST',
+      body: data
+    }).then(() => {
+      console.log('updated');
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
   return (
+
     <>
       <TableContainer>
         <Table striped bordered hover>
@@ -81,8 +93,8 @@ export default function RestaurantsTable(props) {
                 </td>
                 <td align="right">{restaurantData.address}</td>
                 <td align="right">{`${restaurantData.delivery_price}`}</td>
-                <td align="right">{`${restaurantData.opening}`}</td>
-                <td align="right">{`${restaurantData.closing}`}</td>
+                <td align="right">{`${restaurantData.open_hours}`}</td>
+                <td align="right">{`${restaurantData.close_hours}`}</td>
                 <td align="center">
                   <Link to={`/restaurants/${restaurantData.restaurant_id}/items`}>
                     <Button style={{
