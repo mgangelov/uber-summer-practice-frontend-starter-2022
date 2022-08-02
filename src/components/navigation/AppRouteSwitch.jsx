@@ -5,6 +5,8 @@ import {
 } from 'react-router-dom';
 import CharacterPage from '../page/CharacterPage';
 import PlanetsPage from '../page/PlanetsPage';
+import StatisticsPage from '../page/StatisticsPage';
+import ViewProfilePage from '../page/ViewProfilePage';
 import Login from '../page/Login';
 import Register from '../page/Register';
 import OpenOrdersPage from '../page/OpenOrdersPage';
@@ -19,6 +21,8 @@ export default function AppRouteSwitch() {
       <Route exact path="/" element={<HomePage />} />
       <Route path="/orders" element={<OpenOrdersPage />} />
       <Route path="/character" element={<CharacterPage />} />
+      <Route path="/statistics" element={<StatisticsPage />} />
+      <Route path="/edit-profile" element={<ViewProfilePage />} />
     </Routes>
   );
 }
