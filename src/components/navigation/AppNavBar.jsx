@@ -25,15 +25,20 @@ export default function AppNavBar() {
         <Container>
           <Navbar.Brand>Uber Delivery</Navbar.Brand>
           <Nav className="me-auto">
+<<<<<<< Updated upstream
             <Nav.Link as="div"><MenuLink to="/login">Login</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/register">Register</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/planets">Planets</MenuLink></Nav.Link>
+=======
+            <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink to="/orders">Open Orders</MenuLink></Nav.Link>
+>>>>>>> Stashed changes
             <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <AppRouteSwitch />
     </Router>
-
+    
   );
 }
