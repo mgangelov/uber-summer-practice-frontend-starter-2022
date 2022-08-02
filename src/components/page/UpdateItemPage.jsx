@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
@@ -36,7 +37,7 @@ ImageContainer.propTypes = {
 
 export default function UpdateItemPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  const [showItemModal, toggleItemModal] = useState(false);
+  //const [showItemModal, toggleItemModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
   const { restaurant_id } = useParams();
   const { item_id } = useParams();
@@ -84,13 +85,13 @@ export default function UpdateItemPage() {
     formData.append('price', values.price);
 
     postData(`http://localhost:5000/restaurants/${restaurant_id}/items/${item_id}`, formData);
-    toggleItemModal(true);
+    // toggleItemModal(true);
   };
 
-  const onModalClose = () => {
-    toggleItemModal(false);
-    setValues(INITIAL_VALUES);
-  };
+  // const onModalClose = () => {
+  //   toggleItemModal(false);
+  //   setValues(INITIAL_VALUES);
+  // };
 
   return (
     <>
@@ -114,7 +115,7 @@ export default function UpdateItemPage() {
         <p>Please update item</p>
         <UpdateItemForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
       </Container>
-      <ItemModal itemData={values} visible={showItemModal} onClose={onModalClose} />
+      {/* <ItemModal itemData={values} visible={showItemModal} onClose={onModalClose} /> */}
     </>
   );
 }

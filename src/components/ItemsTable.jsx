@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import DeleteItemModal from './DeleteItemModal';
 
 function TableContainer(props) {
   return (
@@ -10,7 +11,7 @@ function TableContainer(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '200px',
+      height: 'S200px',
     }}
     >
       {props.children}
@@ -23,6 +24,9 @@ TableContainer.propTypes = {
 };
 
 export default function ItemsTable(props) {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   if (props.itemsData.length === 0) {
     return (
       <TableContainer>
@@ -36,69 +40,62 @@ export default function ItemsTable(props) {
       method: 'DELETE',
     }).then(() => {
       props.onItemDeleted(itemId);
+      setShowDeleteModal(false);
     }).catch((err) => {
       console.error(err);
     });
   }
-
-  function updateItem(restaurantId, itemId) {
-    fetch(`http://localhost:5000/restaurants/${restaurantId}/items/${itemId}`, {
-      method: 'POST',
-    }).then(() => {
-      console.log('updated');
-    }).catch((err) => {
-      console.error(err);
-    });
-  }
-
 
   return (
-    <TableContainer>
-      <Table striped bordered hover>
-        <thead>
-          <tr style={{
-            backgroundColor: 'white',
-          }}
-          >
-            <th>Name</th>
-            <th align="right">Category</th>
-            <th align="right">Price</th>
-            <th align="right"> </th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.itemsData.map(({
-            name, category, price, item_id, restaurant_id,
-          }) => (
-            <tr key={name}>
-              <td>
-                {name}
-              </td>
-              <td align="right">{category}</td>
-              <td align="right">{`${price} BGN`}</td>
-              <td align="center">
-                <Link to={`/restaurants/${restaurant_id}/items/${item_id}`}>
+    <>
+      <TableContainer>
+        <Table striped bordered hover>
+          <thead>
+            <tr style={{
+              backgroundColor: 'white',
+            }}
+            >
+              <th>Name</th>
+              <th align="right">Category</th>
+              <th align="right">Price</th>
+              <th align="right"> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.itemsData.map((itemData) => (
+              <tr key={itemData.item_id}>
+                <td>
+                  {itemData.name}
+                </td>
+                <td align="right">{itemData.category}</td>
+                <td align="right">{`${itemData.price} BGN`}</td>
+                <td align="center">
+                  <Link to={`/restaurants/${itemData.restaurant_id}/items/${itemData.item_id}`}>
+                    <Button
+                      style={{ backgroundColor: 'blue' }}
+                    >
+                      Update
+                    </Button>
+                  </Link>
+                </td>
+                <td align="center">
                   <Button
                     style={{ backgroundColor: 'blue' }}
-                    onClick={() => updateItem(restaurant_id, item_id)}
+                    onClick={() => {
+                      setSelectedItem(itemData);
+                      setShowDeleteModal(true);
+                    }}
                   >
-                    Update
+                    Delete
                   </Button>
-                </Link>
-              </td>
-              <td align="center">
-                <Button
-                  style={{ backgroundColor: 'blue' }}
-                  onClick={() => deleteItem(restaurant_id, item_id)}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </TableContainer>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </TableContainer>
+      {showDeleteModal && <DeleteItemModal visible={showDeleteModal} itemData={selectedItem} onDelete={deleteItem} onClose={() => setShowDeleteModal(false)} />}
+    </>
   );
 }
 
