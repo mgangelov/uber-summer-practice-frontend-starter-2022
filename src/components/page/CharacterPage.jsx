@@ -7,7 +7,7 @@ import CharacterForm from '../CharacterForm';
 import CharacterModal from '../CharacterModal';
 
 const INITIAL_VALUES = {
-  name: '',
+  name: 'ivan',
   age: 0,
   email: '',
   affinity: 'light',
