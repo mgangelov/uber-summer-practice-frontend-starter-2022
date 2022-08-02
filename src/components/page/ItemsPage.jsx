@@ -63,9 +63,8 @@ export default function ItemsPage() {
       >
         {dataLoading ? (
           <LoadingContainer />
-        ) : (<ItemsTable itemsData={itemsData} onItemDeleted={deleteItem}/>)}
+        ) : (<ItemsTable itemsData={itemsData} onItemDeleted={deleteItem} />)}
       </Container>
-
     </>
   );
 }

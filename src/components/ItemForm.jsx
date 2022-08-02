@@ -40,6 +40,9 @@ export default function ItemForm({ values, setValues, onSubmit }) {
         <FloatingLabel label="Price">
           <Form.Control required type="number" placeholder="Enter price" min="1" value={values.price} onChange={handlePriceChange} />
         </FloatingLabel>
+        {/* <Form.Text className="text-muted">
+          Make it original.
+        </Form.Text> */}
       </Form.Group>
 
       <Button
