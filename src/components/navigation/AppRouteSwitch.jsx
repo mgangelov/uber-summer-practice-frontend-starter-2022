@@ -6,10 +6,11 @@ import {
 import CharacterPage from '../page/CharacterPage';
 import PlanetsPage from '../page/PlanetsPage';
 import StatisticsPage from '../page/StatisticsPage';
-import ViewProfilePage from '../page/ViewProfilePage';
+import EditProfilePage from '../page/EditProfilePage';
 import Login from '../page/Login';
 import Register from '../page/Register';
 import OpenOrdersPage from '../page/OpenOrdersPage';
+
 
 export default function AppRouteSwitch() {
   return (
@@ -21,8 +22,8 @@ export default function AppRouteSwitch() {
       <Route exact path="/" element={<HomePage />} />
       <Route path="/orders" element={<OpenOrdersPage />} />
       <Route path="/character" element={<CharacterPage />} />
-      <Route path="/statistics" element={<StatisticsPage />} />
-      <Route path="/edit-profile" element={<ViewProfilePage />} />
+      <Route path="/statistics/:id" element={<StatisticsPage />} />
+      <Route path="/edit-profile" element={<EditProfilePage />} />
     </Routes>
   );
 }

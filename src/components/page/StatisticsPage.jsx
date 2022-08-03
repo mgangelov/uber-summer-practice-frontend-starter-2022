@@ -1,61 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function App() {
-  const [data, setData] = useState([{}]);
+// function App() {
+//   const [data, setData] = useState([{}]);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/courier/1/stats').then(
-      (res) => res.json(),
-    ).then(
-      (data) => {
-        setData(data);
-        console.log(data);
-      },
-    );
-  }, []);
+//   useEffect(() => {
+//     fetch('http://localhost:5000/courier/1/stats').then(
+//       (res) => res.json(),
+//     ).then(
+//       (data) => {
+//         setData(data);
+//         console.log(data);
+//       },
+//     );
+//   }, []);
 
-  return (
-    <div>
-      {(typeof data.members === 'undefined') ? (
-        <p>
-          Loading...
-        </p>
-      ) : (
-        data.members.map((member, i) => (
-          <p key={i}>{member}</p>
-        ))
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       {(typeof data.members === 'undefined') ? (
+//         <p>
+//           Loading...
+//         </p>
+//       ) : (
+//         data.members.map((member, i) => (
+//           <p key={i}>{member}</p>
+//         ))
+//       )}
+//     </div>
+//   );
+// }
 
 export default function StatisticsPage() {
   const navigate = useNavigate();
 
-  // const [statistics, setStatisticsData] = useState([]);
-  // const [dataLoading, setDataLoading] = useState([false]);
-  // const [dataRequestStatus, setDataRequestStatus] = useState(200);
+  const [statistics, setStatisticsData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // const fetchData = async () => {
-  //   setDataLoading(true);
-  //   const statistics = await fetch(`${url}/courier/<int:courier_id>`);
-  //   const statisticsStatus = statistics.status;
-  //   const statisticsDataJSON = await statistics.json();
-  //   console.log(statisticsDataJSON);
-  //   setOrdersData(statisticsDataJSON);
-  //   setDataRequestStatus(statisticsStatus);
-  //   setDataLoading(false);
-  // };
+  const { id } = useParams();
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const url = 'http://127.0.0.1:5000';
 
-  // if (dataRequestStatus !== 200) {
-  //   return (<p>Something went wrong with your request.</p>);
-  // }
+  const fetchData = useCallback(async () => {
+    const statisticsData = await fetch(`${url}/courier/${id}/stats`);
+    const statisticsDataJSON = await statisticsData.json();
+    setStatisticsData(statisticsDataJSON);
+    setLoading(false);
+  }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  useEffect(() => {
+    console.log(typeof statistics.earnedMoneyFromDeliveryPrice);
+  }, [statistics]);
+
+  if (loading) {
+    return (<div>Loading</div>);
+  }
 
   return (
     <>
@@ -103,7 +106,6 @@ export default function StatisticsPage() {
         }}
       >
         Statistics
-
       </h1>
 
       <p
@@ -114,7 +116,8 @@ export default function StatisticsPage() {
           left: '3cm',
         }}
       >
-        Amount of deliveries:
+        Amount of deliveries:&nbsp;
+        {statistics.deliveriesAmount}
       </p>
 
       <p
@@ -125,7 +128,8 @@ export default function StatisticsPage() {
           left: '3cm',
         }}
       >
-        Earned money:
+        Earned money:&nbsp;
+        {statistics.earnedMoneyFromDeliveryPrice.toFixed(2)}
       </p>
 
     </>
