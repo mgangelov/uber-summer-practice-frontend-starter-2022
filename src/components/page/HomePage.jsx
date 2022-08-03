@@ -24,7 +24,6 @@ export default function HomePage() {
     const restaurantsDataReceived = await fetch(`${ORDERAPI_URL}/restaurant`);
     const restaurantsDataStatus = restaurantsDataReceived.status;
     const restaurantsDataJSON = await restaurantsDataReceived.json();
-    console.log(restaurantsDataJSON);
     setRestaurantData(restaurantsDataJSON);
     setDataRequestStatus(restaurantsDataStatus);
     setDataLoading(false);

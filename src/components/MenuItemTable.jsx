@@ -21,14 +21,7 @@ TableContainer.propTypes = {
 
 function DisplayData(props) {
   const { info } = props;
-  const [count, setCount] = useState(0);
-  const onClickFunc = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    } else {
-      setCount(0);
-    }
-  };
+
   return (
     <tr key={props.trKey}>
       <td>{info.id}</td>
@@ -36,21 +29,32 @@ function DisplayData(props) {
       <td>{info.category}</td>
       <td>{info.price}</td>
       <td align="center">
-        <button type="button" onClick={onClickFunc} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>-</button>
+        <button type="button" onClick={() => props.onQuantityChange('-', info.id)} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>-</button>
         {/* REPLACE COUNT WITH info.quantity, remove count stuff after */}
-        <p style={{ display: 'inline-block', marginLeft: '20px' }}>{count}</p>
-        <button type="button" onClick={() => setCount(count + 1)} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>+</button>
+        <p style={{ display: 'inline-block', marginLeft: '20px' }}>{info.quantity}</p>
+        <button type="button" onClick={() => props.onQuantityChange('+', info.id)} style={{ marginLeft: '20px', background: 'black', color: 'white' }}>+</button>
       </td>
     </tr>
   );
 }
 
 export default function MenuItemTable(props) {
-  console.log('Menu data is ', props.menuData);
-  // Update menuData, add quantity property to every menu item
-  const menuDataWithQuantity = menuData.map();
-  // Use localMenuData to display items
-  const [localMenuData, setLocalMenuData] = useState(menuDataWithQuantity);
+  const [localMenuData, setLocalMenuData] = useState(props.menuData);
+
+  const handleQuantityChange = (operation, menuItemID) => {
+    const currItem = localMenuData.find((item) => item.id === menuItemID);
+    if (operation === '+') {
+      currItem.quantity += 1;
+    } else if (operation === '-' && currItem.quantity > 0) {
+      currItem.quantity -= 1;
+    }
+
+    const index = localMenuData.indexOf(currItem);
+    const newLocalMenuData = [...localMenuData];
+    newLocalMenuData.splice(index, 1, currItem);
+    setLocalMenuData(newLocalMenuData);
+  };
+
   if (props.menuData.length === 0) {
     return (
       <TableContainer>
@@ -58,18 +62,6 @@ export default function MenuItemTable(props) {
       </TableContainer>
     );
   }
-
-  const handleQuantityChange = (operation, menuItemID) => {
-
-    // Check if operation is plus or minus
-    // If plus:
-    //   1. Find menuItem in localMenuData
-    //   2. Increase/decrease quantity of local item
-    //   3. Set new  localMenuData to contain new item
-    
-    
-    setLocalMenuData({...localMenuData, "new item with increased quality"})
-  };
 
   return (
     <TableContainer>
@@ -88,13 +80,12 @@ export default function MenuItemTable(props) {
           </tr>
         </thead>
         <tbody>
-          {/* Change menuData with localMenuData here */}
-          {props.menuData.map((data) => (
+          {localMenuData.map((menuItem) => (
             <DisplayData
-              key={data.id}
-              trKey={data.id}
-              info={data}
-              onQuantityChange={(operation) => handleQuantityChange(operation, data.id)}
+              key={menuItem.id}
+              trKey={menuItem.id}
+              info={menuItem}
+              onQuantityChange={handleQuantityChange}
             />
           ))}
         </tbody>
@@ -105,5 +96,5 @@ export default function MenuItemTable(props) {
 }
 
 MenuItemTable.propTypes = {
-  menuData: PropTypes.node,
+  menuData: PropTypes.array,
 };

@@ -21,8 +21,8 @@ TableContainer.propTypes = {
   children: PropTypes.node,
 };
 
-export default function OrdersTable(props) {
-  if (props.ordersData.length === 0) {
+export default function OrderDataTable(props) {
+  if (props.orderData.length === 0) {
     return (
       <TableContainer>
         <p>No data</p>
@@ -52,21 +52,21 @@ export default function OrdersTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.ordersData.map(({
-            OrderID,
+          {props.orderData.map(({
+            ID,
             CreatedAt,
             DeliveryAddress,
             TotalPrice,
             DeliveryPrice,
             PhoneNumber,
             CustomerName,
-            Status,
+            // Status,
             RestaurantName,
             RestaurantAddress,
           }) => (
-            <tr key={OrderID}>
+            <tr key={ID}>
               <td>
-                {OrderID}
+                {ID}
               </td>
               <td align="right">{CreatedAt}</td>
               <td align="right">{DeliveryAddress}</td>
@@ -74,7 +74,7 @@ export default function OrdersTable(props) {
               <td align="right">{DeliveryPrice}</td>
               <td align="right">{PhoneNumber}</td>
               <td align="right">{CustomerName}</td>
-              <td align="right">{Status}</td>
+              {/* <td align="right">{Status}</td> */}
               <td align="right">{RestaurantName}</td>
               <td align="right">{RestaurantAddress}</td>
             </tr>
@@ -85,6 +85,6 @@ export default function OrdersTable(props) {
   );
 }
 
-OrdersTable.propTypes = {
-  ordersData: PropTypes.array,
+OrderDataTable.propTypes = {
+  orderData: PropTypes.array,
 };

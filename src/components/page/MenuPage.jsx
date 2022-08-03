@@ -7,12 +7,25 @@ import OrderForm from '../OrderForm';
 const menuURL = 'http://127.0.0.1:5000/';
 
 const INITIAL_VALUES = {
-  name: '',
-  address: '',
-  phoneNumber: '',
-  cutlery: 0,
-  additionalInfo: '',
+  CustomerName: '',
+  DeliveryAddress: '',
+  PhoneNumber: '',
+  Cutlery: '',
+  AdditionalInfo: '',
 };
+
+function addQuantityToMenuData(menuData) {
+  return menuData.map((menuItem) => {
+    const menuItemWithQuantity = {
+      category: menuItem.category,
+      id: menuItem.id,
+      name: menuItem.name,
+      price: menuItem.price,
+      quantity: 0,
+    };
+    return menuItemWithQuantity;
+  });
+}
 
 export default function MenuPage() {
   const { restaurantID } = useParams();
@@ -23,14 +36,10 @@ export default function MenuPage() {
 
   const fetchData = useCallback(async () => {
     setDataLoading(true);
-    console.log('RESTAURANT ID ', restaurantID);
-    // const onFormSubmit = () =>
-    // const itemsDataReceived = await fetch(`${menuURL}/restaurant/${restaurantID}/item`);
     const itemsDataReceived = await fetch(`${menuURL}/restaurant/${restaurantID}/item`);
     const itemsDataStatus = itemsDataReceived.status;
     const itemsDataJSON = await itemsDataReceived.json();
-    console.log(itemsDataJSON);
-    setMenuData(itemsDataJSON);
+    setMenuData(addQuantityToMenuData(itemsDataJSON));
     setDataRequestStatus(itemsDataStatus);
     setDataLoading(false);
   }, [restaurantID]);
@@ -57,11 +66,12 @@ export default function MenuPage() {
   const onFormSubmit = () => {
     const formData = new FormData();
 
-    formData.append('name', values.name);
-    formData.append('address', values.address);
-    formData.append('phoneNumber', values.phoneNumber);
-    formData.append('cutlery', values.cutlery);
-    formData.append('additionalInfo', values.additionalInfo);
+    formData.append('CustomerName', values.name);
+    formData.append('DeliveryAddress', values.address);
+    formData.append('PhoneNumber', values.phoneNumber);
+    formData.append('Cutlery', values.cutlery);
+    formData.append('AdditionalInfo', values.additionalInfo);
+    formData.append('items', 'item_id: 1, quantity:2');
 
     postData(`http://localhost:5000/restaurant/${restaurantID}/order`, JSON.stringify(values));
     // ?? redirect
