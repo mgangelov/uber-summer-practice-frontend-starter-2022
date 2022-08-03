@@ -4,6 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import CharacterPage from '../page/CharacterPage';
+// import PlanetsPage from '../page/PlanetsPage';
 import StatisticsPage from '../page/StatisticsPage';
 import Login from '../page/Login';
 import Register from '../page/Register';

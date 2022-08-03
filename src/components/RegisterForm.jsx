@@ -58,13 +58,13 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
         </FloatingLabel>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId = "formStart">
+      <Form.Group className="mb-3" controlId="formStart">
         <FloatingLabel label="StartWorkingHour">
           <Form.Control required type="text" placeholder="Enter start hour" value={values.start_hour} onChange={handleStartHourChange} />
         </FloatingLabel>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId = "formEnd">
+      <Form.Group className="mb-3" controlId="formEnd">
         <FloatingLabel label="EndWorkingHour">
           <Form.Control required type="text" placeholder="Enter end hour" value={values.end_hour} onChange={handleEndHourChange} />
         </FloatingLabel>

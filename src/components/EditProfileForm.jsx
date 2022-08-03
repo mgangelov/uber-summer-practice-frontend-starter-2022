@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
+async function deleteAccount(accountId) {
+  await fetch(`http://127.0.0.1:5000/courier/${accountId}`, { method: 'DELETE' });
+}
 
 export default function CharacterForm({ values, setValues, onSubmit }) {
+  const navigate = useNavigate();
+
   const handleNameChange = (event) => setValues({
     ...values,
     name: event.target.value,
@@ -53,7 +60,11 @@ export default function CharacterForm({ values, setValues, onSubmit }) {
 
       <Button
         variant="primary"
-        type="submit"
+        // type="submit"
+        onClick={async () => {
+          await deleteAccount(3);
+          navigate('/login');
+        }}
         style={{
           backgroundColor: 'red',
           border: 'white',

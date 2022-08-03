@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import LoginForm from '../LoginForm';
 
-// const onFormSubmit = () => console.log("Success");
-const textstyle = { textDecorationLine: 'underline', marginLeft: 462 };
 const INITIAL_VALUES = {
   email: '',
 };
@@ -65,7 +63,7 @@ export default function LoginPage() {
         Enter your information here:
       </p>
       <LoginForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
-      <Link to="/register"><p style={textstyle}>Don't have registration yet? Click here to make one.</p></Link>
+      <Link to="/register"><p>Don't have registration yet? Click here to make one.</p></Link>
       <footer style={footerStyle}>
         <blockquote className="blockquote text-center">
           <p><small>There is no can't.</small></p>

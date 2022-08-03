@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 // function App() {
 //   const [data, setData] = useState([{}]);
@@ -33,20 +34,28 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export default function StatisticsPage() {
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
 
   const [statistics, setStatisticsData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams();
-
   const url = 'http://127.0.0.1:5000';
 
   const fetchData = useCallback(async () => {
-    const statisticsData = await fetch(`${url}/courier/${id}/stats`);
+    setLoading(true);
+    const statisticsData = await fetch(`${url}/courier/stats`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-tokens': cookies['x-access-tokens'],
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    });
     const statisticsDataJSON = await statisticsData.json();
     setStatisticsData(statisticsDataJSON);
     setLoading(false);
-  }, [id]);
+  }, [cookies]);
 
   useEffect(() => {
     fetchData();
