@@ -5,8 +5,7 @@ import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import republicLogo from '../../static/republicLogo.png';
 import empireLogo from '../../static/empireLogo.png';
 import RegisterForm from '../RegisterForm';
-// import RegisterModal from '../RegisterModal';
-
+import RegisterModal from '../RegisterModal';
 const INITIAL_VALUES = {
   name: '',
   phone_number: '+359',
@@ -17,7 +16,7 @@ const INITIAL_VALUES = {
 
 export default function RegisterPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  //   const [showRegisterModal, toggleRegisterModal] = useState(false);
+  const [showRegisterModal, toggleRegisterModal] = useState(false);
 
   async function postData(url = '', data = {}) {
     const response = await fetch(url, {
@@ -39,6 +38,7 @@ export default function RegisterPage() {
 
   const onFormSubmit = () => {
     const formData = new FormData();
+    toggleRegisterModal(true);
     formData.append('name', values.name);
     formData.append('phone_number', values.phone);
     formData.append('email', values.email);
@@ -46,6 +46,11 @@ export default function RegisterPage() {
     formData.append('end_hour', values.end);
 
     postData('http://127.0.0.1:5000/register', JSON.stringify(values));
+  };
+
+  const onModalClose = () => {
+    toggleRegisterModal(false);
+    setValues(INITIAL_VALUES);
   };
   return (
     <>
@@ -58,7 +63,7 @@ export default function RegisterPage() {
         <p>Hello, please submit your application for a new courier.</p>
         <RegisterForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
       </Container>
-      {/* <RegisterModal registerData={values} visible={showRegisterModal} onClose={onModalClose} /> */}
+      <RegisterModal registerData={values} visible={showRegisterModal} onClose={onModalClose} />
     </>
   );
 }
