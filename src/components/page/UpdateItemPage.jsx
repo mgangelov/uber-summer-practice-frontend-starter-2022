@@ -5,7 +5,6 @@ import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import item from '../../static/item.jpg';
 import UpdateItemForm from '../UpdateItemForm';
-import ItemModal from '../ItemModal';
 
 const itemsAPI_URL = 'http://127.0.0.1:5000';
 
@@ -37,20 +36,15 @@ ImageContainer.propTypes = {
 
 export default function UpdateItemPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  //const [showItemModal, toggleItemModal] = useState(false);
   const [logoSrc, setLogoSrc] = useState();
   const { restaurant_id } = useParams();
   const { item_id } = useParams();
 
   const fetchData = async () => {
-    // setDataLoading(true);
     const itemsData = await fetch(`${itemsAPI_URL}/restaurants/${restaurant_id}/items/${item_id}`);
-    // const swItemsDataStatus = swItemsData.status;
     const itemsDataJSON = await itemsData.json();
     console.log(itemsDataJSON);
     setValues(itemsDataJSON);
-    // setDataRequestStatus(swItemsDataStatus);
-    // setDataLoading(false);
   };
 
   useEffect(() => {
