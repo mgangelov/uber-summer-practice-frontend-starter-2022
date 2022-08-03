@@ -2,21 +2,16 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import CharacterForm from '../EditProfileForm';
+import EditProfileForm from '../EditProfileForm';
 
 const INITIAL_VALUES = {
   name: '',
   age: '',
   email: '',
-  affinity: 'light',
 };
 
-export default function CharacterPage() {
+export default function EditProfilePage() {
   const [values, setValues] = useState(INITIAL_VALUES);
-  const [showCharacterModal, toggleCharacterModal] = useState(false);
-
-  const onFormSubmit = () => toggleCharacterModal(true);
-
   const navigate = useNavigate();
 
   return (
@@ -61,7 +56,7 @@ export default function CharacterPage() {
           Add your new data for the fields which you want to change and in the other
           fields insert your current data
         </p>
-        <CharacterForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
+        <EditProfileForm values={values} setValues={setValues} onSubmit={() => {}} />
       </Container>
     </>
   );

@@ -2,13 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-async function deleteAccount(accountId) {
-  await fetch(`http://127.0.0.1:5000/courier/${accountId}`, { method: 'DELETE' });
+async function deleteAccount(token) {
+  await fetch('http://127.0.0.1:5000/courier', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-tokens': token,
+    },
+  });
 }
 
-export default function CharacterForm({ values, setValues, onSubmit }) {
+export default function EditProfileForm({ values, setValues, onSubmit }) {
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
 
   const handleNameChange = (event) => setValues({
     ...values,
@@ -62,7 +70,7 @@ export default function CharacterForm({ values, setValues, onSubmit }) {
         variant="primary"
         // type="submit"
         onClick={async () => {
-          await deleteAccount(3);
+          await deleteAccount(cookies['x-access-tokens']);
           navigate('/login');
         }}
         style={{
@@ -86,7 +94,7 @@ export default function CharacterForm({ values, setValues, onSubmit }) {
   );
 }
 
-CharacterForm.propTypes = {
+EditProfileForm.propTypes = {
   values: PropTypes.object,
   setValues: PropTypes.func,
   onSubmit: PropTypes.func,
