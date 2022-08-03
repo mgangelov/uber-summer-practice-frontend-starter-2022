@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Table, Form } from 'react-bootstrap';
+import {
+  Button, Container, Table, Form,
+} from 'react-bootstrap';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+
+
 // import { Link} from 'react-router-dom'
 
 function TableContainer(props) {
@@ -29,12 +35,34 @@ const SubmitButtonStyle = {
   position: 'relative',
 };
 
-
 TableContainer.propTypes = {
   children: PropTypes.node,
 };
 
+
+
 export default function OpenOrdersTable(props) {
+  const navigate = useNavigate();
+  console.log('ORDERS DATA ', props.ordersData);
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
+
+
+  async function postData(url = '', data = {}) {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-tokens': cookies['x-access-tokens'],
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: data,
+    });
+
+    return response;
+  }
+
+  const [selectedOpenOrder, setSelectedOpenOrder] = useState({});
   if (props.ordersData.openOrdersData.length === 0) {
     return (
       <TableContainer>
@@ -42,6 +70,19 @@ export default function OpenOrdersTable(props) {
       </TableContainer>
     );
   }
+
+  const createDelivery = () => {
+    console.log('SELECTED ORDER IS ', selectedOpenOrder);
+    const INITIAL_VALUES = {
+      PhoneNumber: selectedOpenOrder.PhoneNumber,
+      RestaurantAddress: selectedOpenOrder.RestaurantAddress,
+      DeliveryAddress: selectedOpenOrder.DeliveryAddress,
+      ID: selectedOpenOrder.ID,
+      DeliveryPrice: selectedOpenOrder.DeliveryPrice,
+    };
+
+    postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
+  };
 
   return (
     <TableContainer>
@@ -58,33 +99,28 @@ export default function OpenOrdersTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.ordersData.openOrdersData.map(({
-            ID, RestaurantAddress, DeliveryAddress, DeliveryPrice,
-          }) => (
-            <tr key={ID}>
-              <td align="right">{RestaurantAddress}</td>
-              <td align="right">{DeliveryAddress}</td>
-              <td align="right">{DeliveryPrice}</td>
+          {props.ordersData.openOrdersData.map((openOrder) => (
+            <tr key={openOrder.ID}>
+              <td align="right">{openOrder.RestaurantAddress}</td>
+              <td align="right">{openOrder.DeliveryAddress}</td>
+              <td align="right">{openOrder.DeliveryPrice}</td>
               <td align="center">
-              <Form.Check
-                onChange={() => props.setOrderData({
-                ...props.ordersData,
-                selectedOrder: ID
-                })}
-                name="orders"
-                type="radio"  
-          />
+                <Form.Check
+                  onChange={() => setSelectedOpenOrder(openOrder)}
+                  name="orders"
+                  type="radio"
+                />
               </td>
 
             </tr>
           ))}
         </tbody>
       </Table>
-      <Button onClick={() => alert(props.ordersData.selectedOrder)} style={SubmitButtonStyle}>
-          Submit
-        </Button>
+      <Button onClick={() => createDelivery(), navigate('/order')} style={SubmitButtonStyle}>
+        Submit
+      </Button>
     </TableContainer>
-    
+
   );
 }
 
