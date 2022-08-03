@@ -19,7 +19,7 @@ export default function AppRouteSwitch() {
       <Route path="/character" element={<CharacterPage />} />
       <Route path="/orders" element={<OrdersPage />} />
       <Route path="/restaurant/:restaurantID" element={<MenuPage />} />
-      <Route path="/orders/status" element={<OrderStatusPage />} />
+      <Route path="/order/status" element={<OrderStatusPage />} />
       <Route path="/order/:orderId/status" element={<StatusPage />} />
     </Routes>
   );

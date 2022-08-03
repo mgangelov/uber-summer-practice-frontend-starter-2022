@@ -1,11 +1,13 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
-import { Button, FloatingLabel, Form } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
+import {
+  Button, FloatingLabel, Form, Container,
+} from 'react-bootstrap';
+
+import { Link } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
 import OrdersTable from '../OrdersTable';
 import OrderStatusTable from '../OrderStatusTable';
-import {Link} from 'react-router-dom';
 
 const ORDERAPI_URL = 'http://127.0.0.1:5000/';
 
@@ -44,23 +46,19 @@ export default function OrderStatusPage() {
     <>
       <h1 style={{
         fontFamily: 'futura',
-      }}>Status</h1>
+      }}
+      >
+        Status
+
+      </h1>
       <Container style={{
         paddingTop: '30px',
         paddingBottom: '10px',
       }}
-    >
+      >
         {dataLoading
           ? (<LoadingContainer />) : (<OrderStatusTable ordersData={ordersData} />)}
       </Container>
-      <footer style={footerStyle}>
-      <Button
-        variant="primary"
-        type="submit"
-      >
-        Chancel
-      </Button>
-      </footer>
     </>
   );
 }

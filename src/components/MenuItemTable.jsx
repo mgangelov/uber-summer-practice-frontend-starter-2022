@@ -98,3 +98,8 @@ export default function MenuItemTable(props) {
 MenuItemTable.propTypes = {
   menuData: PropTypes.array,
 };
+
+export function getItems(array) {
+  const result = array.filter((quantity) => quantity > 0);
+  return result;
+}

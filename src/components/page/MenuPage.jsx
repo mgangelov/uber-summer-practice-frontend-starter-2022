@@ -2,8 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
-import MenuItemTable from '../MenuItemTable';
+import MenuItemTable, { getItems } from '../MenuItemTable';
 import OrderForm from '../OrderForm';
+
 const menuURL = 'http://127.0.0.1:5000/';
 
 const INITIAL_VALUES = {
@@ -12,6 +13,7 @@ const INITIAL_VALUES = {
   PhoneNumber: '',
   Cutlery: '',
   AdditionalInfo: '',
+  Items: '',
 };
 
 function addQuantityToMenuData(menuData) {
@@ -71,8 +73,8 @@ export default function MenuPage() {
     formData.append('PhoneNumber', values.phoneNumber);
     formData.append('Cutlery', values.cutlery);
     formData.append('AdditionalInfo', values.additionalInfo);
-    formData.append('items', 'item_id: 1, quantity:2');
-
+    const item = JSON.parse('[{"item_id": 1, "quantity": 2}]');
+    formData.append('Items', item);
     postData(`http://localhost:5000/restaurant/${restaurantID}/order`, JSON.stringify(values));
     // ?? redirect
   };
