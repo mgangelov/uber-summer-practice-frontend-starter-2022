@@ -36,7 +36,7 @@ export default function OrderForm({ values, setValues, onSubmit }) {
       onSubmit();
     }}
     >
-      <Form.Group className="mb-3" controlId="formCutlery">
+      <Form.Group className="mb-3" style={{left:"10px"}} controlId="formCutlery">
         <Form.Check
           onChange={handleCutleryButtonChange}
           name="Cutlery"
@@ -82,7 +82,7 @@ export default function OrderForm({ values, setValues, onSubmit }) {
 
       <Form.Group className="mb-3" controlId="formAdditionalInfo">
         <FloatingLabel label="Additional Info">
-          <Form.Control required type="textarea" placeholder="Enter additional info" value={values.additionalInfo} onChange={handleAdditionalInfoChange} />
+          <Form.Control as="textarea" style={{height:"150px",}} rows="3" placeholder="Enter additional info" value={values.additionalInfo} onChange={handleAdditionalInfoChange} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           Please fill in your preferences.

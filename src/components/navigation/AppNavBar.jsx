@@ -34,7 +34,7 @@ export default function AppNavBar() {
             <Nav.Link as="div"><MenuLink className="navlink" to="/planets">Planets</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink className="navlink" to="/character">Character</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink className="navlink" to="/orders">Orders</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink className="navlink" to="/order/:id/status">Order Status</MenuLink></Nav.Link>
+            <Nav.Link as="div"><MenuLink className="navlink" to="/order/status">Order Status</MenuLink></Nav.Link>
           </Nav>
         </Container>
       </Navbar>

@@ -60,7 +60,7 @@ export default function OrderDataTable(props) {
             DeliveryPrice,
             PhoneNumber,
             CustomerName,
-            // Status,
+            Status,
             RestaurantName,
             RestaurantAddress,
           }) => (
@@ -74,7 +74,7 @@ export default function OrderDataTable(props) {
               <td align="right">{DeliveryPrice}</td>
               <td align="right">{PhoneNumber}</td>
               <td align="right">{CustomerName}</td>
-              {/* <td align="right">{Status}</td> */}
+              <td align="right">{Status}</td>
               <td align="right">{RestaurantName}</td>
               <td align="right">{RestaurantAddress}</td>
             </tr>
