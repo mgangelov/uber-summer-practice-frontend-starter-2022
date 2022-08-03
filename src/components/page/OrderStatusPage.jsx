@@ -28,7 +28,6 @@ export default function OrderStatusPage() {
     const ordersDataReceived = await fetch(`${ORDERAPI_URL}/order`);
     const ordersDataStatus = ordersDataReceived.status;
     const ordersDataJSON = await ordersDataReceived.json();
-    console.log(ordersDataJSON.Orders);
     setOrdersData(ordersDataJSON.Orders);
     setDataRequestStatus(ordersDataStatus);
     setDataLoading(false);

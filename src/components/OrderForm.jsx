@@ -22,12 +22,12 @@ export default function OrderForm({ values, setValues, onSubmit }) {
 
   const handleAdditionalInfoChange = (event) => setValues({
     ...values,
-    additionalInfo: event.target.value,
+    AdditionalInfo: event.target.value,
   });
 
   const handleCutleryButtonChange = (event) => setValues({
     ...values,
-    cutlery: event.target.value,
+    Cutlery: event.target.value,
   });
 
   return (
