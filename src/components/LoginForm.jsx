@@ -20,9 +20,6 @@ export default function LoginForm({ values, setValues, onSubmit }) {
         <FloatingLabel label="Email">
           <Form.Control required type="email" placeholder="Enter email" value={values.email} onChange={handleEmailChange} />
         </FloatingLabel>
-        <Form.Text className="text-muted">
-          Courier
-        </Form.Text>
       </Form.Group>
 
       <Button

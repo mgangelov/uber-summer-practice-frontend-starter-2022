@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { Container } from 'react-bootstrap';
 import LoadingContainer from '../common/LoadingContainer';
 import OpenOrdersTable from '../OpenOrdersTable';
-
-const restApi_URL = 'http://127.0.0.1:5000';  
+const restApi_URL = 'http://127.0.0.1:5000';
 
 const initialOrderData={
   openOrdersData: [],
@@ -15,10 +15,19 @@ export default function OpenOrdersPage() {
   const [ordersData, setOrderData] = useState(initialOrderData);
   const [dataLoading, setDataLoading] = useState(false);
   const [dataRequestStatus, setDataRequestStatus] = useState(200);
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
 
   const fetchData = async () => {
     setDataLoading(true);
-    const openOrdersData = await fetch(`${restApi_URL}/orders`);
+    const openOrdersData = await fetch(`${restApi_URL}/orders`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-tokens': cookies['x-access-tokens'],
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    });
     const openOrdersDataStatus = openOrdersData.status;
     const openOrdersDataJSON = await openOrdersData.json();
     console.log(openOrdersDataJSON);
