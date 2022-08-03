@@ -36,7 +36,7 @@ export default function OrderForm({ values, setValues, onSubmit }) {
       onSubmit();
     }}
     >
-      <Form.Group className="mb-3" style={{left:"10px"}} controlId="formCutlery">
+      <Form.Group className="mb-3" controlId="formCutlery">
         <Form.Check
           onChange={handleCutleryButtonChange}
           name="Cutlery"
