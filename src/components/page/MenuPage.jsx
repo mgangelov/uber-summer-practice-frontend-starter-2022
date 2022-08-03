@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Container } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import LoadingContainer from '../common/LoadingContainer';
 import MenuItemTable, { getItems } from '../MenuItemTable';
 import OrderForm from '../OrderForm';
@@ -11,9 +11,8 @@ const INITIAL_VALUES = {
   CustomerName: '',
   DeliveryAddress: '',
   PhoneNumber: '',
-  Cutlery: '',
+  Cutlery: false,
   AdditionalInfo: '',
-  Items: '',
 };
 
 function addQuantityToMenuData(menuData) {
@@ -30,6 +29,8 @@ function addQuantityToMenuData(menuData) {
 }
 
 export default function MenuPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { restaurantID } = useParams();
   const [menuData, setMenuData] = useState([]);
   const [dataLoading, setDataLoading] = useState([false]);
@@ -65,23 +66,49 @@ export default function MenuPage() {
     return response.json();
   }
 
-  const onFormSubmit = () => {
-    const formData = new FormData();
+  function formatJSONPayload(menuItems, formValues) {
+    const formattedMenuItems = menuItems.filter((item) => item.quantity > 0).map((item) => ({
+      item_id: item.id,
+      quantity: item.quantity,
+    }));
+    const requestBody = {
+      CustomerName: formValues.CustomerName,
+      DeliveryAddress: formValues.DeliveryAddress,
+      PhoneNumber: formValues.PhoneNumber,
+      Cutlery: formValues.Cutlery,
+      AdditionalInfo: formValues.AdditionalInfo,
+      Items: formattedMenuItems,
+    };
+    return requestBody;
+  }
 
-    formData.append('CustomerName', values.name);
-    formData.append('DeliveryAddress', values.address);
-    formData.append('PhoneNumber', values.phoneNumber);
-    formData.append('Cutlery', values.cutlery);
-    formData.append('AdditionalInfo', values.additionalInfo);
-    const item = JSON.parse('[{"item_id": 1, "quantity": 2}]');
-    formData.append('Items', item);
-    postData(`http://localhost:5000/restaurant/${restaurantID}/order`, JSON.stringify(values));
-    // ?? redirect
+  const onFormSubmit = async () =>  {
+    setValues(formatJSONPayload(menuData, values));
+    const postResponse = await postData(`http://localhost:5000/restaurant/${restaurantID}/order`, JSON.stringify(values));
+    navigate("/order/" + postResponse['ID'] + "/status");
   };
 
   if (dataRequestStatus !== 200) {
     return (<p>Something went wrong with your request.</p>);
   }
+
+  // menuData - should be localMenuData with quantity
+  // onItemQuantityChange - function which modifies selectedItems
+
+  const handleQuantityChange = (operation, menuItemID) => {
+    const currItem = menuData.find((item) => item.id === menuItemID);
+    if (operation === '+') {
+      currItem.quantity += 1;
+    } else if (operation === '-' && currItem.quantity > 0) {
+      currItem.quantity -= 1;
+    }
+
+    const index = menuData.indexOf(currItem);
+    const newMenuData = [...menuData];
+    newMenuData.splice(index, 1, currItem);
+    setMenuData(newMenuData);
+  };
+
   return (
     <Container style={{
 
@@ -90,8 +117,8 @@ export default function MenuPage() {
     }}
     >
       {dataLoading
-        ? (<LoadingContainer />) : (<MenuItemTable menuData={menuData} />)}
-      <OrderForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
+        ? (<LoadingContainer />) : (<MenuItemTable onItemQuantityChange={handleQuantityChange} menuData={menuData} />)}
+      <OrderForm values={formatJSONPayload(menuData, values)} setValues={setValues} onSubmit={onFormSubmit} />
     </Container>
   );
 }

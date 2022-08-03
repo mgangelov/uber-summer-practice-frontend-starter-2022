@@ -39,22 +39,6 @@ function DisplayData(props) {
 }
 
 export default function MenuItemTable(props) {
-  const [localMenuData, setLocalMenuData] = useState(props.menuData);
-
-  const handleQuantityChange = (operation, menuItemID) => {
-    const currItem = localMenuData.find((item) => item.id === menuItemID);
-    if (operation === '+') {
-      currItem.quantity += 1;
-    } else if (operation === '-' && currItem.quantity > 0) {
-      currItem.quantity -= 1;
-    }
-
-    const index = localMenuData.indexOf(currItem);
-    const newLocalMenuData = [...localMenuData];
-    newLocalMenuData.splice(index, 1, currItem);
-    setLocalMenuData(newLocalMenuData);
-  };
-
   if (props.menuData.length === 0) {
     return (
       <TableContainer>
@@ -80,12 +64,12 @@ export default function MenuItemTable(props) {
           </tr>
         </thead>
         <tbody>
-          {localMenuData.map((menuItem) => (
+          {props.menuData.map((menuItem) => (
             <DisplayData
               key={menuItem.id}
               trKey={menuItem.id}
               info={menuItem}
-              onQuantityChange={handleQuantityChange}
+              onQuantityChange={props.onItemQuantityChange}
             />
           ))}
         </tbody>
@@ -97,9 +81,10 @@ export default function MenuItemTable(props) {
 
 MenuItemTable.propTypes = {
   menuData: PropTypes.array,
+  onItemQuantityChange: PropTypes.func,
 };
 
 export function getItems(array) {
-  const result = array.filter((quantity) => quantity > 0);
-  return result;
+  array.filter((item) => item.quantity > 0);
+  return array;
 }
