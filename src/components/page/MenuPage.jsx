@@ -30,7 +30,6 @@ function addQuantityToMenuData(menuData) {
 
 export default function MenuPage() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { restaurantID } = useParams();
   const [menuData, setMenuData] = useState([]);
   const [dataLoading, setDataLoading] = useState([false]);
