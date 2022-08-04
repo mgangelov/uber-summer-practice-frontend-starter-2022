@@ -1,17 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import EditProfileForm from '../EditProfileForm';
 
 const INITIAL_VALUES = {
   name: '',
-  age: '',
+  phoneNumber: '',
   email: '',
 };
 
 export default function EditProfilePage() {
+  const url = 'http://127.0.0.1:5000';
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
   const [values, setValues] = useState(INITIAL_VALUES);
+
+  const fetchData1 = useCallback(async () => {
+    const profileData = await fetch(`${url}/courier`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-tokens': cookies['x-access-tokens'],
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    });
+    const profileDataJSON = await profileData.json();
+    setValues({
+      name: profileDataJSON.name,
+      phoneNumber: profileDataJSON.phone_number,
+      email: profileDataJSON.email,
+    });
+  }, [cookies]);
+
+  useEffect(() => {
+    fetchData1();
+  }, [fetchData1]);
+
+  // console.log(JSON.stringify(viewProfile.name));
+
+  const onFormSubmit = async () => {
+    console.log(JSON.stringify(values));
+    await fetch(`${url}/courier/edit_profile`, {
+      method: 'PUT',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-tokens': cookies['x-access-tokens'],
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({
+        name: values.name,
+        phone_number: values.phoneNumber,
+        email: values.email,
+      }),
+    });
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -53,10 +102,9 @@ export default function EditProfilePage() {
       }}
       >
         <p>
-          Add your new data for the fields which you want to change and in the other
-          fields insert your current data
+          Add your new data for the fields which you want to change
         </p>
-        <EditProfileForm values={values} setValues={setValues} onSubmit={() => {}} />
+        <EditProfileForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
       </Container>
     </>
   );
