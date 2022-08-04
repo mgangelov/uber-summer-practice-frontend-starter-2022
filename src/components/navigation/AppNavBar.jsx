@@ -6,6 +6,7 @@ import {
   Nav,
 } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import AppRouteSwitch from './AppRouteSwitch';
 
 function MenuLink({ children, ...props }) {
@@ -19,6 +20,8 @@ MenuLink.propTypes = {
 };
 
 export default function AppNavBar() {
+  const [, setCookie] = useCookies(['x-access-tokens']);
+
   return (
     <Router>
       <Navbar bg="light" variant="light">
@@ -33,12 +36,20 @@ export default function AppNavBar() {
             <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/statistics">Statistics</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/edit-profile">Edit Profile</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/login">Log out</MenuLink></Nav.Link>
+            <Nav.Link
+              as="div"
+              onClick={() => setCookie('x-access-tokens', null)}
+            >
+              <MenuLink to="/login">
+                Log out
+              </MenuLink>
+
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <AppRouteSwitch />
     </Router>
-    
+
   );
 }
