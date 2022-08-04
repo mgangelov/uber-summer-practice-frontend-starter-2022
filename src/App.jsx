@@ -8,11 +8,11 @@ import AppNavBar from './components/navigation/AppNavBar';
 
 function App() {
   return (
-      <Container className="App">
-        <Row className="header">
-          <AppNavBar />
-        </Row>
-      </Container>
+    <Container className="App">
+      <Row className="header">
+        <AppNavBar />
+      </Row>
+    </Container>
   );
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useCookies } from 'react-cookie';
 import {
   Container,
   Navbar,
   Nav,
 } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import AppRouteSwitch from './AppRouteSwitch';
 
 function MenuLink({ children, ...props }) {
@@ -20,7 +20,8 @@ MenuLink.propTypes = {
 };
 
 export default function AppNavBar() {
-  const [, setCookie] = useCookies(['x-access-tokens']);
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
+  const isTokenNull = cookies['x-access-tokens'] === 'null';
 
   return (
     <Router>
@@ -30,21 +31,22 @@ export default function AppNavBar() {
           <Nav className="me-auto">
             <Nav.Link as="div"><MenuLink to="/login">Login</MenuLink></Nav.Link>
             <Nav.Link as="div"><MenuLink to="/register">Register</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/">Home</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/orders">Open Orders</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/delivery/">Order</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/character">Character</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/statistics">Statistics</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/edit-profile">Edit Profile</MenuLink></Nav.Link>
+            {!isTokenNull && <Nav.Link as="div"><MenuLink to="/orders">Open Orders</MenuLink></Nav.Link>}
+            {!isTokenNull && <Nav.Link as="div"><MenuLink to="/delivery/">Order</MenuLink></Nav.Link>}
+            {!isTokenNull && <Nav.Link as="div"><MenuLink to="/statistics">Statistics</MenuLink></Nav.Link>}
+            {!isTokenNull && <Nav.Link as="div"><MenuLink to="/edit-profile">Edit Profile</MenuLink></Nav.Link>}
+            {!isTokenNull && (
             <Nav.Link
               as="div"
-              onClick={() => setCookie('x-access-tokens', null)}
+              onClick={() => {
+                setCookie('x-access-tokens', null);
+              }}
             >
               <MenuLink to="/login">
                 Log out
               </MenuLink>
-
             </Nav.Link>
+            )}
           </Nav>
         </Container>
       </Navbar>

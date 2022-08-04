@@ -109,7 +109,7 @@ export default function StatisticsPage() {
           left: '3cm',
         }}
       >
-        Earned money:&nbsp;
+        Earned money:&nbsp; BGN
         {statistics.earnedMoneyFromDeliveryPrice.toFixed(2)}
       </p>
 

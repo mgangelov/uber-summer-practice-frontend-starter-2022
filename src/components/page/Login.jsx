@@ -67,7 +67,7 @@ export default function LoginPage() {
         Enter your information here:
       </p>
       <LoginForm values={values} setValues={setValues} onSubmit={onFormSubmit} />
-      <Link to="/register"><p>Don't have registration yet? Click here to make one.</p></Link>
+      <Link to="/register"><p style ={{marginLeft:450}}>Don't have registration yet? Click here to make one.</p></Link>
       <footer style={footerStyle}>
         <blockquote className="blockquote text-center">
           <p><small>There is no can't.</small></p>
