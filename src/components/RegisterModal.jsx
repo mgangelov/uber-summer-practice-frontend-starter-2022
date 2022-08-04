@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Card, Col, Modal, Row,} from 'react-bootstrap';
+import {
+  Button, Card, Col, Modal, Row,
+} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 export default function RegisterModal(props) {
@@ -29,7 +31,7 @@ export default function RegisterModal(props) {
         </Row>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={ () => navigate('/login')}>
+        <Button variant="secondary" onClick={() => navigate('/login')}>
 
           Close
         </Button>
