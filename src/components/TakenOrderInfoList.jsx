@@ -1,7 +1,6 @@
 import { ListGroup } from 'react-bootstrap';
-import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
-import LoadingContainer from './common/LoadingContainer';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ListGroupStyle = {
   display: 'flex',
@@ -12,60 +11,30 @@ const ListGroupStyle = {
 
 };
 
-export default function TakenOrderInfoList() {
-  const [takenOrderData, setTakenOrderData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const { id } = useParams();
-
-  const URL = 'http://127.0.0.1:5000';
-
-  const fetchData = useCallback(async () => {
-    // setDataLoading(true);
-    const swtakenOrderData = await fetch(`${URL}/delivery/${id}`);
-    // const swOrderDataStatus = swtakenOrderData.status;
-    const swtakenOrderDataJSON = await swtakenOrderData.json();
-    setTakenOrderData(swtakenOrderDataJSON);
-    setLoading(false);
-    // setDataRequestStatus(swOrderDataStatus);
-    // setDataLoading(false);
-  }, [id]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  // if (dataRequestStatus !== 200) {
-  //   return (<p>Something went wrong with your request.</p>);
-  // }
-
-  if(loading) {
-    return (<LoadingContainer />);
-  }
+export default function TakenOrderInfoList(props) {
+  console.log('Order data ', props.orderData);
   return (
     <ListGroup style={ListGroupStyle}>
       <ListGroup.Item variant="primary">
         Delivery price:&nbsp;
-        {takenOrderData.delivery_price.toFixed(2)}
+        {props.orderData.delivery_price.toFixed(2)}
       </ListGroup.Item>
       <ListGroup.Item variant="success">
         Restaurant address:&nbsp;
-        {takenOrderData.restaurant_address}
+        {props.orderData.restaurant_address}
       </ListGroup.Item>
       <ListGroup.Item variant="danger">
         Client address:&nbsp;
-        {takenOrderData.client_address}
+        {props.orderData.client_address}
       </ListGroup.Item>
       <ListGroup.Item variant="warning">
         Client phone number:&nbsp;
-        {takenOrderData.client_phone_number}
+        {props.orderData.client_phone_number}
       </ListGroup.Item>
-
     </ListGroup>
-
   );
 }
 
-// TakenOrderInfoList.propTypes = {
-//     takenOrderData: PropTypes.array,
-// };
+TakenOrderInfoList.propTypes = {
+  orderData: PropTypes.object,
+};
