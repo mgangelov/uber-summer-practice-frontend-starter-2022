@@ -41,9 +41,7 @@ TableContainer.propTypes = {
 
 export default function OpenOrdersTable(props) {
   const navigate = useNavigate();
-  console.log('ORDERS DATA ', props.ordersData);
   const [cookies, setCookie] = useCookies(['x-access-tokens']);
-
 
   async function postData(url = '', data = {}) {
     const response = await fetch(url, {
@@ -70,7 +68,6 @@ export default function OpenOrdersTable(props) {
   }
 
   const createDelivery = async () => {
-    console.log('SELECTED ORDER IS ', selectedOpenOrder);
     const INITIAL_VALUES = {
       PhoneNumber: selectedOpenOrder.PhoneNumber,
       RestaurantAddress: selectedOpenOrder.RestaurantAddress,
@@ -80,9 +77,8 @@ export default function OpenOrdersTable(props) {
     };
     
     const response = await postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
-    console.log(JSON.stringify(response));
+    
     navigate("/delivery/"+ response['delivery_id']);
-    postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
     
 
   };
