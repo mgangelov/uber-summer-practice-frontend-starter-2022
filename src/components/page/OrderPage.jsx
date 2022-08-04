@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import LoadingContainer from '../common/LoadingContainer';
+import DeliveryStatusModal from '../DeliveryStatusModal';
 
 // import emoji from 'emoji-dictionary';
 import deliveryLogo from '../../static/deliveryLogo.gif';
@@ -38,8 +39,9 @@ const DeliveryLogoStyle = {
   marginRight: 'auto',
 };
 
-// emoji=require('emoji-dictionary')
-
+const INITIAL_VALUES = {
+  status: '',
+};
 export default function OrderPage() {
   const navigate = useNavigate();
 
@@ -48,6 +50,9 @@ export default function OrderPage() {
   const [orderData, setOrderData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie] = useCookies(['x-access-tokens']);
+  const [takenDeliveryStatus, setStatus] = useState(INITIAL_VALUES);
+
+  const [showDeliveryStatusModal, toggleDeliveryStatusModal] = useState(false);
 
   const { id } = useParams();
 
@@ -81,23 +86,38 @@ export default function OrderPage() {
       body: data,
 
     });
+
+    return response;
   }
 
   const cancelStatus = async () => {
-    putData(`${URL}/delivery/order`, JSON.stringify({
+    const response = await putData(`${URL}/delivery/order`, JSON.stringify({
       status: 'Open',
       delivery_id: id,
     }));
-    navigate('/orders')
+
+    if (response.status === 200) {
+      toggleDeliveryStatusModal(true);
+      setStatus('Canceled');
+    }
   };
 
   const finishStatus = async () => {
-    putData(`${URL}/delivery/order`, JSON.stringify({
+    const response = await putData(`${URL}/delivery/order`, JSON.stringify({
       status: 'Finished',
       delivery_id: id,
     }));
-    navigate('/orders')
+
+    if (response.status === 200) {
+      toggleDeliveryStatusModal(true);
+      setStatus('Finished');
+    }
   };
+
+  const onModalClose = () => {
+    toggleDeliveryStatusModal(false);
+  };
+
   return (
     <>
       <h1 style={TextStyle}>Taken delivery information: </h1>
@@ -125,7 +145,7 @@ export default function OrderPage() {
             variant="danger"
             type="submit"
             style={CancelButtonStyle}
-            onClick={() => {cancelStatus()}}
+            onClick={() => { cancelStatus(); }}
           >
             Cancel
           </Button>
@@ -134,12 +154,14 @@ export default function OrderPage() {
             variant="success"
             type="submit"
             style={FinishedButtonStyle}
-            onClick={() => {finishStatus()}}
+            onClick={() => { finishStatus(); }}
           >
             Finished
           </Button>
         </ButtonGroup>
       </Container>
+      <DeliveryStatusModal deliveryStatus={takenDeliveryStatus} visible={showDeliveryStatusModal} onClose={onModalClose} />
+
     </>
   );
 }
