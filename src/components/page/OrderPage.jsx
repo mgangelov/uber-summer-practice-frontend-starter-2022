@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import LoadingContainer from '../common/LoadingContainer';
+
 // import emoji from 'emoji-dictionary';
 import deliveryLogo from '../../static/deliveryLogo.gif';
 import TakenOrderInfoList from '../TakenOrderInfoList';
@@ -40,6 +43,61 @@ const DeliveryLogoStyle = {
 export default function OrderPage() {
   const navigate = useNavigate();
 
+  const URL = 'http://127.0.0.1:5000';
+
+  const [orderData, setOrderData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [cookies, setCookie] = useCookies(['x-access-tokens']);
+
+  const { id } = useParams();
+
+  const fetchData = useCallback(async () => {
+    const takenOrderData = await fetch(`${URL}/delivery/${id}`);
+    const takenOrderDataJSON = await takenOrderData.json();
+    setOrderData(takenOrderDataJSON);
+    setLoading(false);
+  }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  if (loading) {
+    return (<LoadingContainer />);
+  }
+
+  async function putData(url = '', data = {}) {
+    const response = await fetch(url, {
+      method: 'PUT',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-type': 'application/json',
+        'x-access-tokens': cookies['x-access-tokens'],
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: data,
+
+    });
+  }
+
+  const cancelStatus = async () => {
+    putData(`${URL}/delivery/order`, JSON.stringify({
+      status: 'Open',
+      delivery_id: id,
+    }));
+    navigate('/orders')
+  };
+
+  const finishStatus = async () => {
+    putData(`${URL}/delivery/order`, JSON.stringify({
+      status: 'Finished',
+      delivery_id: id,
+    }));
+    navigate('/orders')
+  };
   return (
     <>
       <h1 style={TextStyle}>Taken delivery information: </h1>
@@ -50,7 +108,7 @@ export default function OrderPage() {
         paddingTop: '100px',
       }}
       >
-        <TakenOrderInfoList />
+        <TakenOrderInfoList orderData={orderData} />
       </Container>
       <Container style={{
         display: 'flex',
@@ -67,7 +125,7 @@ export default function OrderPage() {
             variant="danger"
             type="submit"
             style={CancelButtonStyle}
-            onClick={() => navigate('/orders')}
+            onClick={() => {cancelStatus()}}
           >
             Cancel
           </Button>
@@ -76,7 +134,7 @@ export default function OrderPage() {
             variant="success"
             type="submit"
             style={FinishedButtonStyle}
-            onClick={() => navigate('/orders')}
+            onClick={() => {finishStatus()}}
           >
             Finished
           </Button>

@@ -37,8 +37,6 @@ TableContainer.propTypes = {
   children: PropTypes.node,
 };
 
-
-
 export default function OpenOrdersTable(props) {
   const navigate = useNavigate();
   console.log('ORDERS DATA ', props.ordersData);
