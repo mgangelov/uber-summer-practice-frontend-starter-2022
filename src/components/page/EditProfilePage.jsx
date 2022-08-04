@@ -59,6 +59,7 @@ export default function EditProfilePage() {
         email: values.email,
       }),
     });
+    alert('Updated successfully');
   };
 
   const navigate = useNavigate();
