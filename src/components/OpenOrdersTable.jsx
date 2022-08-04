@@ -78,10 +78,13 @@ export default function OpenOrdersTable(props) {
       ID: selectedOpenOrder.ID,
       DeliveryPrice: selectedOpenOrder.DeliveryPrice,
     };
-
+    
     const response = await postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
     console.log(JSON.stringify(response));
     navigate("/delivery/"+ response['delivery_id']);
+    postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
+    
+
   };
 
   return (
