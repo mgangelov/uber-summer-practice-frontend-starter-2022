@@ -7,8 +7,6 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 
-// import { Link} from 'react-router-dom'
-
 function TableContainer(props) {
   return (
     <Container style={{
@@ -59,7 +57,7 @@ export default function OpenOrdersTable(props) {
       body: data,
     });
 
-    return response;
+    return response.json();
   }
 
   const [selectedOpenOrder, setSelectedOpenOrder] = useState({});
@@ -71,7 +69,7 @@ export default function OpenOrdersTable(props) {
     );
   }
 
-  const createDelivery = () => {
+  const createDelivery = async () => {
     console.log('SELECTED ORDER IS ', selectedOpenOrder);
     const INITIAL_VALUES = {
       PhoneNumber: selectedOpenOrder.PhoneNumber,
@@ -80,9 +78,13 @@ export default function OpenOrdersTable(props) {
       ID: selectedOpenOrder.ID,
       DeliveryPrice: selectedOpenOrder.DeliveryPrice,
     };
-
+    
+    const response = await postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
+    console.log(JSON.stringify(response));
+    navigate("/delivery/"+ response['delivery_id']);
     postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
     
+
   };
 
   return (

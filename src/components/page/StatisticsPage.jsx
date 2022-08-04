@@ -1,36 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-// function App() {
-//   const [data, setData] = useState([{}]);
-
-//   useEffect(() => {
-//     fetch('http://localhost:5000/courier/1/stats').then(
-//       (res) => res.json(),
-//     ).then(
-//       (data) => {
-//         setData(data);
-//         console.log(data);
-//       },
-//     );
-//   }, []);
-
-//   return (
-//     <div>
-//       {(typeof data.members === 'undefined') ? (
-//         <p>
-//           Loading...
-//         </p>
-//       ) : (
-//         data.members.map((member, i) => (
-//           <p key={i}>{member}</p>
-//         ))
-//       )}
-//     </div>
-//   );
-// }
 
 export default function StatisticsPage() {
   const navigate = useNavigate();
