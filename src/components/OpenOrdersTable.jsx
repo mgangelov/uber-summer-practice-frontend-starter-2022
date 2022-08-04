@@ -82,6 +82,7 @@ export default function OpenOrdersTable(props) {
     };
 
     postData('http://127.0.0.1:5000/delivery', JSON.stringify(INITIAL_VALUES));
+    
   };
 
   return (
@@ -116,7 +117,7 @@ export default function OpenOrdersTable(props) {
           ))}
         </tbody>
       </Table>
-      <Button onClick={() => createDelivery(), navigate('/order')} style={SubmitButtonStyle}>
+      <Button onClick={() => createDelivery()} style={SubmitButtonStyle}>
         Submit
       </Button>
     </TableContainer>
