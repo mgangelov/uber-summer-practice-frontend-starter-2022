@@ -22,7 +22,7 @@ export default function AppRouteSwitch() {
       <Route path="/character" element={<CharacterPage />} />
       <Route path="/statistics" element={<StatisticsPage />} />
       <Route path="/edit-profile" element={<EditProfilePage />} />
-      <Route path="/order/:id" element={<OrderPage />} />
+      <Route path="/delivery/:id" element={<OrderPage />} />
     </Routes>
   );
 }

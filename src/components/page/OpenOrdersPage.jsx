@@ -61,12 +61,6 @@ export default function OpenOrdersPage() {
   return (
     <>
     <h1 style={TextStyle}>Take order form</h1>
-    <form>
-      <label style={InputTextStyle}>
-         Current courier address 
-        <input type="text" name="courierAddres" />
-      </label>
-    </form>
     <Container style={{
       paddingTop: '30px',
       paddingBottom: '10px',
