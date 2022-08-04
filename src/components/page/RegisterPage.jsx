@@ -6,9 +6,10 @@ import republicLogo from '../../static/republicLogo.png';
 import empireLogo from '../../static/empireLogo.png';
 import RegisterForm from '../RegisterForm';
 import RegisterModal from '../RegisterModal';
+
 const INITIAL_VALUES = {
   name: '',
-  phone_number: '+359',
+  phone_number: '',
   email: '',
   start_hour: '',
   end_hour: '',
@@ -33,18 +34,29 @@ export default function RegisterPage() {
       body: data, // body data type must match "Content-Type" header
     });
 
-    return response.json(); // parses JSON response into native JavaScript objects
+    return response; // parses JSON response into native JavaScript objects
   }
 
-  const onFormSubmit = () => {
+  const onFormSubmit = async () => {
     const formData = new FormData();
-    toggleRegisterModal(true);
-    formData.append('name', values.name);
-    formData.append('phone_number', values.phone);
-    formData.append('email', values.email);
-    formData.append('start_hour', values.start);
-    formData.append('end_hour', values.end);
-
+    const res = await postData('http://127.0.0.1:5000/register', JSON.stringify(values));
+    console.log(res);
+    console.log('ne sum v if-a');
+    if (res.status === 403) {
+      console.log('inside if');
+      const resjson = await res.json();
+      console.log(resjson);
+      console.log('RES ', res);
+      alert(resjson.errors);
+    }
+    if (res.status === 200) {
+      formData.append('name', values.name);
+      formData.append('phone_number', values.phone);
+      formData.append('email', values.email);
+      formData.append('start_hour', values.start);
+      formData.append('end_hour', values.end);
+      toggleRegisterModal(true);
+    }
     postData('http://127.0.0.1:5000/register', JSON.stringify(values));
   };
 
