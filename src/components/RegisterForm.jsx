@@ -45,7 +45,7 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
 
       <Form.Group className="mb-3" controlId="formPhone">
         <FloatingLabel label="Phone number">
-          <Form.Control required type="text" placeholder="Enter phone number" value={values.phone_number} onChange={handlePhoneChange} />
+          <Form.Control required type="text" placeholder="Enter phone number" value={values.phone_number} onChange={handlePhoneChange} minLength={9} />
         </FloatingLabel>
         <Form.Text className="text-muted">
           It should include digits only.
@@ -59,13 +59,13 @@ export default function RegisterForm({ values, setValues, onSubmit }) {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formStart">
-        <FloatingLabel label="StartWorkingHour">
+        <FloatingLabel label="Start working hour">
           <Form.Control required type="text" placeholder="Enter start hour" value={values.start_hour} onChange={handleStartHourChange} />
         </FloatingLabel>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formEnd">
-        <FloatingLabel label="EndWorkingHour">
+        <FloatingLabel label="End working hour">
           <Form.Control required type="text" placeholder="Enter end hour" value={values.end_hour} onChange={handleEndHourChange} />
         </FloatingLabel>
       </Form.Group>

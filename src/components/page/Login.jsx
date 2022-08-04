@@ -51,6 +51,10 @@ export default function LoginPage() {
       setCookie('x-access-tokens', token);
       navigate('/orders');
     }
+    if (res.status === 401) {
+      console.log(res.body);
+      alert('Courier does not exist');
+    }
     return res;
   };
   return (
