@@ -40,9 +40,7 @@ export default function RegisterPage() {
   const onFormSubmit = async () => {
     const formData = new FormData();
     const res = await postData('http://127.0.0.1:5000/register', JSON.stringify(values));
-    console.log(res);
     if (res.status === 403) {
-      console.log('inside if');
       const resjson = await res.json();
       console.log(resjson);
       alert(resjson.errors);
