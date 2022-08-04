@@ -74,7 +74,7 @@ function JsonDisplay() {
 
   return (
     <TableContainer>
-      <Table striped bordered hover>
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr style={{
             backgroundColor: 'black',
