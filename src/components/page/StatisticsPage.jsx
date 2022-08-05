@@ -1,8 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import MoneyFlying from '../../static/MoneyFlying.gif';
 
+const MoneyLogoStyle = {
+  display: 'flex',
+  position: 'relative',
+  top: -10,
+  width: 200,
+  height: 150,
+  marginLeft: 'auto',
+  marginRight: 'auto',
+};
 
 export default function StatisticsPage() {
   const navigate = useNavigate();
@@ -43,39 +53,6 @@ export default function StatisticsPage() {
 
   return (
     <>
-      <div id="button1">
-        <Button
-          variant="outline-primary"
-          style={{
-            position: 'relative',
-            top: '20px',
-            flex: 1,
-            width: '100px',
-            left: '92%',
-          }}
-        >
-          {' '}
-          Log out
-
-        </Button>
-
-        <Button
-          variant="outline-primary"
-          onClick={() => navigate('/edit-profile')}
-          style={{
-            position: 'relative',
-            top: '20px',
-            flex: 1,
-            width: '120px',
-            left: '-7.5%',
-          }}
-        >
-          {' '}
-          Edit profile
-
-        </Button>
-      </div>
-
       <h1
         className="stat"
         style={{
@@ -84,16 +61,21 @@ export default function StatisticsPage() {
           alignItems: 'center',
           fontSize: '60px',
           textAlign: 'center',
+          lineHeight:'2.2',
         }}
       >
         Statistics
       </h1>
 
+      <Container>
+        <img style={MoneyLogoStyle} src={MoneyFlying} alt="" />
+      </Container>
       <p
         className="lead1"
         style={{
+          textAlign: 'center',
           fontSize: '40px',
-          position: 'relative',
+          //position: 'relative',
           left: '3cm',
         }}
       >
@@ -104,12 +86,13 @@ export default function StatisticsPage() {
       <p
         className="lead2"
         style={{
+          textAlign: 'center',
           fontSize: '40px',
-          position: 'relative',
+          //position: 'relative',
           left: '3cm',
         }}
       >
-        Earned money:&nbsp; BGN
+        Earned money:&nbsp; BGN&nbsp;
         {statistics.earnedMoneyFromDeliveryPrice.toFixed(2)}
       </p>
 

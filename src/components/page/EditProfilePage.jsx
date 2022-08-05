@@ -66,22 +66,6 @@ export default function EditProfilePage() {
 
   return (
     <>
-      <div>
-        <Button
-          variant="outline-primary"
-          onClick={() => navigate('/statistics')}
-          style={{
-            position: 'relative',
-            top: '20px',
-            flex: 1,
-            width: '120px',
-          }}
-        >
-          {' '}
-          Statistics
-
-        </Button>
-      </div>
       <h1
         className="stat"
         style={{
@@ -90,6 +74,7 @@ export default function EditProfilePage() {
           alignItems: 'center',
           fontSize: '60px',
           textAlign: 'center',
+          lineHeight:'2.2',
         }}
       >
         Editing Profile
