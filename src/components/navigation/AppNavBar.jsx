@@ -29,8 +29,8 @@ export default function AppNavBar() {
         <Container>
           <Navbar.Brand>Uber Delivery</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as="div"><MenuLink to="/login">Login</MenuLink></Nav.Link>
-            <Nav.Link as="div"><MenuLink to="/register">Register</MenuLink></Nav.Link>
+            {isTokenNull && <Nav.Link as="div"><MenuLink to="/login">Login</MenuLink></Nav.Link>}
+            {isTokenNull && <Nav.Link as="div"><MenuLink to="/register">Register</MenuLink></Nav.Link>}
             {!isTokenNull && <Nav.Link as="div"><MenuLink to="/orders">Open Orders</MenuLink></Nav.Link>}
             {!isTokenNull && <Nav.Link as="div"><MenuLink to="/delivery/">Order</MenuLink></Nav.Link>}
             {!isTokenNull && <Nav.Link as="div"><MenuLink to="/statistics">Statistics</MenuLink></Nav.Link>}
