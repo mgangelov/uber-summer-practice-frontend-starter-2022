@@ -29,7 +29,7 @@ const SubmitButtonStyle = {
   backgroundColor: 'green',
   color: 'white',
   border: 'white',
-  top: 80,
+  top: 100,
   position: 'relative',
 };
 
