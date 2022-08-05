@@ -3,6 +3,7 @@ import './App.css';
 import {
   Container, Row,
 } from 'react-bootstrap';
+// import { CookiesProvider } from 'react-cookie';
 import AppNavBar from './components/navigation/AppNavBar';
 
 function App() {
